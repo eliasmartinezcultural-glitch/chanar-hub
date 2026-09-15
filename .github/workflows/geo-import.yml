@@ -16,17 +16,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 24
 
-      - name: Ejecutar importador
+      - name: Ejecutar importador provincial
         run: node tools/geo-importer.mjs
 
-      - name: Guardar cola y reporte en Git
+      - name: Validar que la cola existe
+        run: |
+          test -s geo-import-queue.json
+          node -e "const x=require('./geo-import-queue.json'); console.log(JSON.stringify(x.counts)); console.log(JSON.stringify(x.layers,null,2));"
+
+      - name: Publicar cola como artefacto de auditoría
+        uses: actions/upload-artifact@v4
+        with:
+          name: geo-import-queue-${{ github.run_number }}
+          path: geo-import-queue.json
+          retention-days: 7
+
+      - name: Guardar cola en Git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
