@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07110f">
+<meta name="description" content="Chañar HUB — una puerta digital para descubrir, encontrar y resolver en San Patricio del Chañar.">
+<title>Chañar HUB</title>
+<style>
+:root{--bg:#07110f;--panel:#0d1b18;--panel2:#12241f;--text:#f4f0df;--muted:#a9b8af;--line:#284039;--accent:#d8b56a;--accent2:#77c6a1;--danger:#e99b75;--shadow:0 20px 60px #0008}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 15% 0,#1b3a2d 0,transparent 34%),radial-gradient(circle at 100% 20%,#40331c 0,transparent 28%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}button,input{font:inherit}button{cursor:pointer}.wrap{max-width:1120px;margin:auto;padding:18px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:6px 0 28px}.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.04em;font-size:1.1rem}.mark{width:38px;height:38px;border:1px solid #ffffff25;border-radius:13px;background:linear-gradient(145deg,#d8b56a,#527b65);display:grid;place-items:center;box-shadow:0 8px 25px #0006}.pill{border:1px solid var(--line);background:#ffffff08;color:var(--muted);padding:8px 12px;border-radius:999px;font-size:.78rem}.hero{padding:28px 0 18px}.eyebrow{color:var(--accent);font-weight:800;letter-spacing:.13em;text-transform:uppercase;font-size:.72rem}.hero h1{font-size:clamp(2.7rem,8vw,6.8rem);line-height:.88;letter-spacing:-.075em;margin:12px 0 18px;max-width:900px}.hero p{font-size:clamp(1rem,2vw,1.25rem);line-height:1.55;color:var(--muted);max-width:700px}.search{margin:26px 0;display:flex;gap:10px;background:#091512cc;border:1px solid var(--line);padding:8px;border-radius:20px;box-shadow:var(--shadow);backdrop-filter:blur(12px)}.search input{width:100%;border:0;outline:0;background:transparent;color:var(--text);padding:13px 14px}.search button,.primary{border:0;background:var(--accent);color:#172016;font-weight:900;padding:12px 17px;border-radius:14px}.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0 32px}.quick button{min-height:94px;text-align:left;padding:15px;border:1px solid var(--line);background:linear-gradient(145deg,#12231f,#0c1715);color:var(--text);border-radius:18px;transition:.2s}.quick button:hover,.card:hover{transform:translateY(-3px);border-color:#6d947f}.quick strong{display:block;font-size:1rem;margin-bottom:5px}.quick span{font-size:.75rem;color:var(--muted)}.section{margin:36px 0}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:14px}.section h2{font-size:1.4rem;margin:0;letter-spacing:-.03em}.section small{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.card{background:linear-gradient(145deg,#11211d,#0a1513);border:1px solid var(--line);border-radius:20px;padding:18px;min-height:150px;transition:.2s}.icon{font-size:1.6rem}.card h3{margin:12px 0 5px}.card p{color:var(--muted);font-size:.88rem;line-height:1.45;margin:0}.card button{margin-top:15px;border:1px solid var(--line);background:#ffffff08;color:var(--text);border-radius:10px;padding:8px 11px}.result{display:none;border:1px solid #496957;background:#11251e;border-radius:20px;padding:18px;margin:16px 0}.result.show{display:block}.result h3{margin:0 0 8px}.result p{color:var(--muted);margin:0;line-height:1.5}.notice{margin-top:30px;border-left:3px solid var(--accent);padding:12px 15px;background:#ffffff06;color:var(--muted);font-size:.8rem;line-height:1.5}.footer{padding:50px 0 30px;color:#74857d;font-size:.78rem;display:flex;justify-content:space-between;gap:15px;border-top:1px solid #ffffff0b;margin-top:50px}@media(max-width:760px){.quick{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.hero h1{font-size:3.8rem}.search{border-radius:17px}.search button{padding:10px}.footer{display:block}.footer div+div{margin-top:10px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand"><div class="mark">✦</div><div>CHAÑAR<br><span style="color:var(--accent)">HUB</span></div></div><div class="pill">PROTOTIPO · 01</div></header>
+<main>
+<section class="hero"><div class="eyebrow">San Patricio del Chañar · puerta digital</div><h1>Descubrí.<br>Encontrá.<br>Resolvé.</h1><p>Una idea simple: que una persona pueda abrir un solo lugar y saber qué puede hacer, encontrar o descubrir en Chañar.</p></section>
+<div class="search"><input id="need" aria-label="Qué necesitás" placeholder="¿Qué necesitás? Ej: quiero conocer algo, comer, hacer un trámite..."/><button onclick="smartSearch()">Buscar</button></div>
+<div id="result" class="result"></div>
+<section><div class="section-head"><h2>¿Qué estás buscando?</h2><small>un toque alcanza</small></div><div class="quick">
+<button onclick="choose('vive')"><strong>🏠 Vivo acá</strong><span>Servicios, trámites y vida diaria</span></button>
+<button onclick="choose('visita')"><strong>🌄 Estoy de visita</strong><span>Qué conocer, dónde ir y qué descubrir</span></button>
+<button onclick="choose('busca')"><strong>🔎 Busco algo</strong><span>Encontrá una categoría rápidamente</span></button>
+<button onclick="choose('ahora')"><strong>⚡ ¿Qué hay ahora?</strong><span>Agenda, actividades y novedades</span></button>
+</div></section>
+<section class="section"><div class="section-head"><h2>El mapa mental de Chañar</h2><small>base para crecer</small></div><div class="grid">
+<div class="card"><div class="icon">🏥</div><h3>Salud</h3><p>Hospital, centros, farmacias y orientación básica.</p><button onclick="category('Salud')">Explorar</button></div>
+<div class="card"><div class="icon">🚌</div><h3>Movilidad</h3><p>Transporte, recorridos y puntos útiles.</p><button onclick="category('Movilidad')">Explorar</button></div>
+<div class="card"><div class="icon">🛒</div><h3>Comercios</h3><p>Compras, alimentos, servicios y emprendimientos.</p><button onclick="category('Comercios')">Explorar</button></div>
+<div class="card"><div class="icon">🏛️</div><h3>Instituciones</h3><p>Lugares y organismos que forman parte de la comunidad.</p><button onclick="category('Instituciones')">Explorar</button></div>
+<div class="card"><div class="icon">🌿</div><h3>Turismo</h3><p>Naturaleza, cultura, historias y lugares para descubrir.</p><button onclick="category('Turismo')">Explorar</button></div>
+<div class="card"><div class="icon">📅</div><h3>Agenda</h3><p>Una futura cartelera comunitaria, sin mezclar información no verificada.</p><button onclick="category('Agenda')">Explorar</button></div>
+</div></section>
+<section class="section"><div class="section-head"><h2>La parte potente</h2><small>no hace falta IA todavía</small></div><div class="card" style="min-height:auto"><h3>🧠 “Decime qué necesitás”</h3><p>El prototipo interpreta palabras clave y dirige a una respuesta. Más adelante podemos conectarlo a una base de datos real, mapas, formularios, agenda comunitaria y fuentes verificadas.</p></div></section>
+<div class="notice">⚠️ <strong>Prototipo:</strong> esta primera versión no inventa teléfonos, horarios, precios ni servicios. Los datos reales se incorporarán después de verificarlos.</div>
+</main>
+<footer class="footer"><div>CHAÑAR HUB · concepto independiente</div><div>Hecho para web · sin instalación · pensado para compartir</div></footer>
+</div>
+<script>
+const responses={
+ vive:{title:'🏠 Modo vecino',text:'Podemos convertir esta pantalla en tu acceso rápido a salud, trámites, transporte, comercios, instituciones y servicios locales.'},
+ visita:{title:'🌄 Modo visitante',text:'La idea: contame cuánto tiempo tenés y qué te interesa. Chañar HUB puede construir una pequeña ruta de descubrimiento con lugares e historias verificadas.'},
+ busca:{title:'🔎 Modo búsqueda',text:'Probá escribir algo como “comer”, “salud”, “transporte”, “turismo” o “trámite”. El prototipo entiende esas palabras.'},
+ ahora:{title:'⚡ Modo ahora',text:'Acá podremos concentrar agenda, actividades y novedades. La regla será simple: información fechada y fuente identificable.'}
+};
+function show(title,text){const r=document.getElementById('result');r.innerHTML='<h3>'+title+'</h3><p>'+text+'</p>';r.classList.add('show');r.scrollIntoView({behavior:'smooth',block:'center'})}
+function choose(k){show(responses[k].title,responses[k].text)}
+function category(k){show('📍 '+k,'Esta categoría ya tiene su lugar en el sistema. El siguiente paso es cargar información real, revisada y útil, sin rellenar con datos inventados.')}
+function smartSearch(){const q=document.getElementById('need').value.toLowerCase().trim();if(!q){show('👋 Probemos','Escribí una necesidad concreta. Por ejemplo: “quiero conocer algo”, “necesito salud”, “busco dónde comprar” o “qué puedo hacer hoy”.');return}let title='🔎 Te entendimos';let text='';if(/turis|conocer|visita|pasear|historia|lugar/.test(q))text='Parece que buscás descubrir Chañar. Entrarías al módulo Turismo + Historias + Rutas.';else if(/salud|hospital|farmacia|médic|doctor/.test(q))text='Parece que necesitás orientación sobre salud. Entrarías al módulo Salud, donde solo mostraremos información verificada.';else if(/comer|comida|restaurant|bar|panader/.test(q))text='Parece que buscás dónde comer o comprar alimentos. Entrarías al módulo Comercios.';else if(/bus|colect|taxi|trans|mover|viaj/.test(q))text='Parece que necesitás moverte. Entrarías al módulo Movilidad.';else if(/trámite|tramite|municip|document|papel/.test(q))text='Parece que buscás resolver un trámite. Entrarías al módulo Instituciones y Trámites.';else if(/hoy|ahora|evento|actividad|agenda|fin de semana/.test(q))text='Parece que querés saber qué está pasando. Entrarías a la Agenda, con fecha y fuente.';else text='Todavía no conozco esa necesidad. Eso es bueno: podemos usar estas consultas para decidir qué módulos realmente necesita la comunidad.';show(title,text)}
+document.getElementById('need').addEventListener('keydown',e=>{if(e.key==='Enter')smartSearch()});
+</script>
+</body>
+</html>
