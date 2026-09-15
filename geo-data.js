@@ -1,8 +1,8 @@
 window.CHANAR_GEO = {
-  schemaVersion: "1.1",
+  schemaVersion: "1.2",
   updated: "2026-09-15",
   attribution: "Chañar HUB · Ocarina Producciones",
-  categories: ["Salud","Educación","Comercio","Turismo","Deporte","Instituciones","Historia","Producción"],
+  categories: ["Salud","Educación","Comercio","Turismo","Deporte","Instituciones","Historia","Producción","Territorio"],
   places: [
     {
       id:"mun-spc", name:"Municipalidad de San Patricio del Chañar", category:"Instituciones", subcategory:"Gobierno local",
@@ -15,6 +15,14 @@ window.CHANAR_GEO = {
       lat:-38.62957, lon:-68.29623, status:"verified", confidence:"high", sourceType:"cartographic",
       source:"Cartografía pública / búsqueda local", sourceUrl:"https://www.google.com/maps/search/?api=1&query=Hospital+de+San+Patricio+del+Chañar", verifiedAt:"2026-09-15",
       verificationMethod:"contraste cartográfico público", description:"Establecimiento sanitario local.", tags:["salud","hospital"]
+    },
+    {
+      id:"dpc-localidad-spc", name:"San Patricio del Chañar", category:"Territorio", subcategory:"Localidad",
+      lat:-38.6263025, lon:-68.2966602, status:"verified", confidence:"high", sourceType:"official",
+      source:"DPCeIT · Base catastral provincial", sourceUrl:"https://dpcatastro.neuquen.gov.ar/server/rest/services/Base/MapServer/9", verifiedAt:"2026-09-15",
+      verificationMethod:"consulta automática del geoservicio provincial + revisión editorial de correspondencia territorial",
+      description:"Punto oficial de la localidad de San Patricio del Chañar obtenido de la capa provincial de Localidades.",
+      tags:["territorio","localidad","chañar","DPCeIT"], sourceObjectId:94
     },
     {
       id:"plaza-ninos", name:"Plaza Derechos de los Niños", category:"Instituciones", subcategory:"Espacio público",
@@ -90,7 +98,7 @@ window.CHANAR_GEO = {
     {
       id:"cci", name:"CCI", category:"Instituciones", subcategory:"Equipamiento comunitario",
       status:"pending", confidence:"medium", sourceType:"official", source:"Documentación de planificación y equipamiento municipal", sourceUrl:"https://boficial.neuquen.gov.ar/", verifiedAt:"2026-09-15",
-      verificationMethod:"equipamiento mencionado oficialmente; nombre/ubicación a validar", description:"Equipamiento identificado en documentación territorial local. No se expande la sigla sin fuente explícita.", tags:["comunidad"]
+      verificationMethod:"equipamiento mencionado officiellement; nombre/ubicación a validar", description:"Equipamiento identificado en documentación territorial local. No se expande la sigla sin fuente explícita.", tags:["comunidad"]
     },
     {
       id:"casa-abuelos", name:"Casa de Abuelos", category:"Instituciones", subcategory:"Adultos mayores",
