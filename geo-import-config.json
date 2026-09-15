@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.0",
+  "runDate": "2026-09-15",
+  "pageSize": 1000,
+  "requestDelayMs": 250,
+  "bbox": {
+    "minLon": -68.40,
+    "maxLon": -68.18,
+    "minLat": -38.74,
+    "maxLat": -38.52
+  },
+  "layers": [
+    {
+      "id": "localidades",
+      "name": "Localidades",
+      "category": "Instituciones",
+      "subcategory": "Territorio / localidad",
+      "url": "https://dpcatastro.neuquen.gov.ar/server/rest/services/Base/MapServer/9",
+      "source": "DPCeIT · Base catastral provincial"
+    },
+    {
+      "id": "ejidos",
+      "name": "Ejidos",
+      "category": "Instituciones",
+      "subcategory": "Territorio / ejido",
+      "url": "https://dpcatastro.neuquen.gov.ar/server/rest/services/Base/MapServer/10",
+      "source": "DPCeIT · Base catastral provincial"
+    },
+    {
+      "id": "barrios",
+      "name": "Barrios",
+      "category": "Instituciones",
+      "subcategory": "Territorio / barrio",
+      "url": "https://dpcatastro.neuquen.gov.ar/server/rest/services/Base/MapServer/18",
+      "source": "DPCeIT · Base catastral provincial"
+    },
+    {
+      "id": "vias-comunicacion",
+      "name": "Vías de comunicación",
+      "category": "Instituciones",
+      "subcategory": "Movilidad / territorio",
+      "url": "https://dpcatastro.neuquen.gov.ar/server/rest/services/Base/MapServer/5",
+      "source": "DPCeIT · Base catastral provincial"
+    },
+    {
+      "id": "hidrografia",
+      "name": "Hidrografía",
+      "category": "Turismo",
+      "subcategory": "Agua / territorio",
+      "url": "https://dpcatastro.neuquen.gov.ar/server/rest/services/Base/MapServer/2",
+      "source": "DPCeIT · Base catastral provincial"
+    }
+  ]
+}
