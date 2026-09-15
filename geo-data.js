@@ -98,7 +98,7 @@ window.CHANAR_GEO = {
     {
       id:"cci", name:"CCI", category:"Instituciones", subcategory:"Equipamiento comunitario",
       status:"pending", confidence:"medium", sourceType:"official", source:"Documentación de planificación y equipamiento municipal", sourceUrl:"https://boficial.neuquen.gov.ar/", verifiedAt:"2026-09-15",
-      verificationMethod:"equipamiento mencionado officiellement; nombre/ubicación a validar", description:"Equipamiento identificado en documentación territorial local. No se expande la sigla sin fuente explícita.", tags:["comunidad"]
+      verificationMethod:"equipamiento mencionado oficialmente; nombre/ubicación a validar", description:"Equipamiento identificado en documentación territorial local. No se expande la sigla sin fuente explícita.", tags:["comunidad"]
     },
     {
       id:"casa-abuelos", name:"Casa de Abuelos", category:"Instituciones", subcategory:"Adultos mayores",
