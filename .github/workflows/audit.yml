@@ -14,3 +14,12 @@ jobs:
         uses: actions/checkout@v4
       - name: Audit data and architecture
         run: node tools/validate-chanar-hub.mjs
+      - name: Audit canonical registry record by record
+        run: node tools/audit-canonical-registry.mjs
+      - name: Upload canonical audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chanar-canonical-registry-audit
+          path: reports/canonical-registry-audit.json
+          if-no-files-found: ignore
