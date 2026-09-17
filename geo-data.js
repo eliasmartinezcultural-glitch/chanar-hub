@@ -17,3 +17,13 @@ Object.defineProperty(window, 'CHANAR_GEO', {
     };
   }
 });
+
+/* Capa común de experiencia: navegación, acción rápida y navegación móvil.
+ * Se carga desde este puente porque todas las vistas históricas ya lo incluyen.
+ */
+(function(){
+  const s=document.createElement('script');
+  s.src='chanar-hub-core.js';
+  s.defer=true;
+  document.head.appendChild(s);
+})();
