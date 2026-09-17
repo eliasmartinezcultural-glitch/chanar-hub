@@ -3,15 +3,12 @@
   const ui = document.createElement('link'); ui.rel='stylesheet'; ui.href='chanar-ui.css'; document.head.appendChild(ui);
   const source = window.CHANAR_GEO || { categories:[], places:[] };
   const territory = window.CHANAR_TERRITORY || { territories:[] };
-
-  // Fallback incorporado para que TODAS las páginas que ya cargan este archivo
-  // reciban las correcciones aun sin agregar otra etiqueta <script>.
   const audited = {
     checkedAt:'2026-09-17', places:[
       {id:'emeta',status:'retired',replacementId:'epea3'},
       {id:'epea3',name:'EPEA N° 3',category:'Educación',subcategory:'Educación agropecuaria',status:'verified',confidence:'high',address:'Picadas Este y Oeste 5 y 6',description:'Escuela Provincial de Enseñanza Agropecuaria N° 3.',sourceType:'official',source:'Boletín Oficial del Neuquén / UPEFE',sourceUrl:'https://boficial.neuquen.gov.ar/LeyesDecretosDetalle?Id=426027',verifiedAt:'2026-09-17',tags:['educación','agropecuaria','EPEA','producción']},
-      {id:'centro-formacion-agropecuaria',name:'Centro de Formación Profesional Agropecuaria N° 2 “Puesto Chañar”',subcategory:'Formación profesional agropecuaria',status:'verified',confidence:'high',address:'Av. Gasparri Norte y Alerces',description:'Formación profesional vinculada a oficios, producción, gastronomía y turismo local.',sourceType:'official',source:'Consejo Provincial de Educación del Neuquén',sourceUrl:'https://www.neuquen.edu.ar/_trayectos_formativos_partial/',verifiedAt:'2026-09-17',tags:['educación','CFPA','Puesto Chañar','oficios','agropecuaria']},
-      {id:'esc273',name:'Escuela Primaria N° 273 Carlos Julio Sang',subcategory:'Primaria',status:'verified',confidence:'high',sourceType:'official',source:'Argentina.gob.ar / ORSEP',sourceUrl:'https://www.argentina.gob.ar/node/429820',verifiedAt:'2026-09-17',tags:['educación','primaria','escuela 273']},
+      {id:'centro-formacion-agropecuaria',name:'Centro de Formación Profesional Agropecuaria N° 2 “Puesto Chañar”',category:'Educación',subcategory:'Formación profesional agropecuaria',status:'verified',confidence:'high',address:'Av. Gasparri Norte y Alerces',description:'Formación profesional vinculada a oficios, producción, gastronomía y turismo local.',sourceType:'official',source:'Consejo Provincial de Educación del Neuquén',sourceUrl:'https://www.neuquen.edu.ar/_trayectos_formativos_partial/',verifiedAt:'2026-09-17',tags:['educación','CFPA','Puesto Chañar','oficios','agropecuaria']},
+      {id:'esc273',name:'Escuela Primaria N° 273 Carlos Julio Sang',category:'Educación',subcategory:'Primaria',status:'verified',confidence:'high',sourceType:'official',source:'Argentina.gob.ar / ORSEP',sourceUrl:'https://www.argentina.gob.ar/node/429820',verifiedAt:'2026-09-17',tags:['educación','primaria','escuela 273']},
       {id:'escuela364',name:'Escuela Primaria N° 364',category:'Educación',subcategory:'Primaria',status:'verified',confidence:'high',address:'Entre Lago Aluminé, Arroyo Covunco y Av. Ignacio Roberto Gasparri Sur',description:'Nuevo edificio inaugurado el 6 de marzo de 2026.',sourceType:'official',source:'Consejo Provincial de Educación del Neuquén',sourceUrl:'https://www.neuquen.edu.ar/tag/escuela-364/',verifiedAt:'2026-09-17',tags:['educación','primaria','escuela 364','edificio nuevo']},
       {id:'epet26',name:'EPET N° 26',category:'Educación',subcategory:'Secundaria técnica',status:'verified',confidence:'high',address:'Av. Malvinas Argentinas, Pehuén y Alerce',description:'Institución vigente; durante 2026 su edificio propio continúa en obra.',sourceType:'official',source:'Boletín Oficial del Neuquén / Gobierno del Neuquén',sourceUrl:'https://infoleg.neuquen.gov.ar/LeyesDecretosDetalle?id=413986',verifiedAt:'2026-09-17',tags:['educación','técnica','EPET','obra']},
       {id:'cpem31',name:'CPEM N° 31',category:'Educación',subcategory:'Secundaria',status:'verified',confidence:'high',address:'Complejo El Chocón s/n',phone:'0299 485-5095',sourceType:'official',source:'Consejo Provincial de Educación del Neuquén',sourceUrl:'https://www.neuquen.edu.ar/wp-content/uploads/2019/08/Correos-de-escuelas-de-Neuqu%C3%A9n-.pdf',verifiedAt:'2026-09-17',tags:['educación','secundaria','CPEM 31']},
@@ -33,23 +30,12 @@
       {id:'corralon-pitty',name:'Corralón Pitty',category:'Comercio',subcategory:'Materiales / ferretería',status:'verified',confidence:'medium',address:'Río Neuquén Mza G2 Lote 11 y 12',phone:'+54 299 485-5419',description:'Comercio local de materiales y ferretería.',sourceType:'business-directory',source:'Ficha cartográfica pública consultada 17/09/2026',sourceUrl:'https://www.google.com/maps/search/?api=1&query=Corralón+Pitty+San+Patricio+del+Chañar',verifiedAt:'2026-09-17',tags:['comercio','materiales','ferretería']}
     ]
   };
-
-  const corrections=new Map(audited.places.map(x=>[x.id,x]));
-  const retired=new Set(audited.places.filter(x=>x.status==='retired').map(x=>x.id));
+  const corrections=new Map(audited.places.map(x=>[x.id,x])),retired=new Set(audited.places.filter(x=>x.status==='retired').map(x=>x.id));
   const mergePlace=base=>retired.has(base.id)?null:(corrections.has(base.id)?{...base,...corrections.get(base.id)}:base);
-  const basePlaces=(source.places||[]).map(mergePlace).filter(Boolean);
-  const baseIds=new Set(basePlaces.map(x=>x.id));
-  const newVerified=audited.places.filter(x=>!baseIds.has(x.id)&&x.status!=='retired');
-  const mergedPlaces=[...basePlaces,...newVerified];
-
-  const normalize=(x,entityType)=>{
-    const hasCoordinates=Number.isFinite(x.lat)&&Number.isFinite(x.lon),hasGeometry=!!x.geometry,status=x.status==='verified'?'verified':'pending';
-    const spatialStatus=entityType==='territory'?(hasGeometry?'verified':'pending'):(hasCoordinates?'located':(x.address?'address_verified':'unlocated'));
-    return Object.freeze({...x,entityType,identityKey:`${entityType}:${x.id}`,publication:status==='verified'&&(entityType==='territory'?hasGeometry:(hasCoordinates||!!x.address))?'published':'pending',spatialStatus,audit:Object.freeze({hasId:!!x.id,hasName:!!x.name,hasCategory:!!x.category,hasSource:!!x.source,hasSourceUrl:!!x.sourceUrl,hasVerificationDate:/^\d{4}-\d{2}-\d{2}$/.test(String(x.verifiedAt||'')),hasSpatialReference:entityType==='territory'?hasGeometry:(hasCoordinates||!!x.address),auditedLayer:!!x.verifiedAt&&!!x.sourceUrl})});
-  };
-  const places=mergedPlaces.map(normalize.bind(null));
-  const territories=(territory.territories||[]).map(x=>normalize(x,'territory'));
-  const all=[...places,...territories],ids=new Set(),duplicateIds=[];
+  const basePlaces=(source.places||[]).map(mergePlace).filter(Boolean),baseIds=new Set(basePlaces.map(x=>x.id));
+  const newVerified=audited.places.filter(x=>!baseIds.has(x.id)&&x.status!=='retired'),mergedPlaces=[...basePlaces,...newVerified];
+  const normalize=(x,entityType)=>{const hasCoordinates=Number.isFinite(x.lat)&&Number.isFinite(x.lon),hasGeometry=!!x.geometry,status=x.status==='verified'?'verified':'pending',spatialStatus=entityType==='territory'?(hasGeometry?'verified':'pending'):(hasCoordinates?'located':(x.address?'address_verified':'unlocated'));return Object.freeze({...x,entityType,identityKey:`${entityType}:${x.id}`,publication:status==='verified'&&(entityType==='territory'?hasGeometry:(hasCoordinates||!!x.address))?'published':'pending',spatialStatus,audit:Object.freeze({hasId:!!x.id,hasName:!!x.name,hasCategory:!!x.category,hasSource:!!x.source,hasSourceUrl:!!x.sourceUrl,hasVerificationDate:/^\d{4}-\d{2}-\d{2}$/.test(String(x.verifiedAt||'')),hasSpatialReference:entityType==='territory'?hasGeometry:(hasCoordinates||!!x.address),auditedLayer:!!x.verifiedAt&&!!x.sourceUrl})});};
+  const places=mergedPlaces.map(x=>normalize(x,'place')),territories=(territory.territories||[]).map(x=>normalize(x,'territory')),all=[...places,...territories],ids=new Set(),duplicateIds=[];
   for(const item of all){if(ids.has(item.identityKey))duplicateIds.push(item.identityKey);ids.add(item.identityKey)}
   window.CHANAR_REGISTRY=Object.freeze({schemaVersion:'1.1',updated:audited.checkedAt,name:'Inventario Canónico de Chañar',owner:'Chañar HUB · Ocarina Producciones',lifecycle:['descubierto','documentado','verificado','publicado'],categories:Object.freeze([...new Set([...(source.categories||[]),...places.map(x=>x.category).filter(Boolean)])]),places:Object.freeze(places),territories:Object.freeze(territories),all:Object.freeze(all),audit:Object.freeze({total:all.length,places:places.length,territories:territories.length,locatedPlaces:places.filter(x=>x.spatialStatus==='located').length,addressVerifiedPlaces:places.filter(x=>x.spatialStatus==='address_verified').length,pendingPlaces:places.filter(x=>x.publication==='pending').length,auditedPlaces:places.filter(x=>x.audit.auditedLayer).length,retiredRecords:retired.size,duplicateIdentityKeys:Object.freeze(duplicateIds)})});
 })();
