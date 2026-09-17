@@ -21,8 +21,18 @@ for (const file of pages) {
   if (!/<title>[^<]+<\/title>/i.test(html)) failures.push(`${file}: falta title`);
   if (!html.includes('chanar-ui.css')) failures.push(`${file}: falta referencia a chanar-ui.css`);
   if (!html.includes('chanar-registry.js')) failures.push(`${file}: falta referencia a chanar-registry.js`);
+  if (html.includes('src="data.js"') || html.includes("src='data.js'")) failures.push(`${file}: todavía carga la base legado data.js`);
   for (const bad of ['localhost:', '127.0.0.1']) if (html.includes(bad)) failures.push(`${file}: contiene referencia local ${bad}`);
 }
+
+// Los archivos históricos data.js/geo-data.js sobreviven sólo como puentes.
+// Si vuelven a contener arrays de lugares, reaparece una segunda fuente de verdad.
+const legacyData = readFileSync(join(root,'data.js'),'utf8');
+if (!legacyData.includes('compatibilidad heredada') || !legacyData.includes('CHANAR_REGISTRY')) failures.push('Legado: data.js dejó de ser un puente explícito al registro canónico');
+if (/\bplaces\s*:\s*\[/.test(legacyData)) failures.push('Legado: data.js contiene una base paralela de lugares');
+const legacyGeo = readFileSync(join(root,'geo-data.js'),'utf8');
+if (!legacyGeo.includes('Compatibilidad geográfica heredada') || !legacyGeo.includes('CHANAR_REGISTRY')) failures.push('Legado: geo-data.js dejó de ser un puente explícito al registro canónico');
+if (/\bplaces\s*:\s*\[/.test(legacyGeo)) failures.push('Legado: geo-data.js contiene una base paralela de lugares');
 
 const registry = readFileSync(join(root,'chanar-registry.js'),'utf8');
 for (const token of ['CHANAR_REGISTRY','identityKey','publication','spatialStatus']) {
