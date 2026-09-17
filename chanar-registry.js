@@ -1,85 +1,55 @@
-/* CHANAR HUB — INVENTARIO CANÓNICO + CAPA DE VERIFICACIÓN */
+/* CHANAR HUB — INVENTARIO CANÓNICO + AUDITORÍA 2026 */
 (function () {
-  const ui = document.createElement('link');
-  ui.rel = 'stylesheet';
-  ui.href = 'chanar-ui.css';
-  document.head.appendChild(ui);
+  const ui = document.createElement('link'); ui.rel='stylesheet'; ui.href='chanar-ui.css'; document.head.appendChild(ui);
+  const source = window.CHANAR_GEO || { categories:[], places:[] };
+  const territory = window.CHANAR_TERRITORY || { territories:[] };
 
-  const source = window.CHANAR_GEO || { categories: [], places: [] };
-  const territory = window.CHANAR_TERRITORY || { territories: [] };
-  const verifiedLayer = window.CHANAR_VERIFIED_2026 || { checkedAt: null, places: [] };
-
-  const corrections = new Map((verifiedLayer.places || []).map(x => [x.id, x]));
-  const retired = new Set((verifiedLayer.places || []).filter(x => x.status === 'retired').map(x => x.id));
-
-  // La capa auditada tiene prioridad. Un registro retirado no vuelve a aparecer por accidente.
-  const mergePlace = (base) => {
-    if (retired.has(base.id)) return null;
-    const patch = corrections.get(base.id);
-    return patch ? { ...base, ...patch } : base;
+  // Fallback incorporado para que TODAS las páginas que ya cargan este archivo
+  // reciban las correcciones aun sin agregar otra etiqueta <script>.
+  const audited = {
+    checkedAt:'2026-09-17', places:[
+      {id:'emeta',status:'retired',replacementId:'epea3'},
+      {id:'epea3',name:'EPEA N° 3',category:'Educación',subcategory:'Educación agropecuaria',status:'verified',confidence:'high',address:'Picadas Este y Oeste 5 y 6',description:'Escuela Provincial de Enseñanza Agropecuaria N° 3.',sourceType:'official',source:'Boletín Oficial del Neuquén / UPEFE',sourceUrl:'https://boficial.neuquen.gov.ar/LeyesDecretosDetalle?Id=426027',verifiedAt:'2026-09-17',tags:['educación','agropecuaria','EPEA','producción']},
+      {id:'centro-formacion-agropecuaria',name:'Centro de Formación Profesional Agropecuaria N° 2 “Puesto Chañar”',subcategory:'Formación profesional agropecuaria',status:'verified',confidence:'high',address:'Av. Gasparri Norte y Alerces',description:'Formación profesional vinculada a oficios, producción, gastronomía y turismo local.',sourceType:'official',source:'Consejo Provincial de Educación del Neuquén',sourceUrl:'https://www.neuquen.edu.ar/_trayectos_formativos_partial/',verifiedAt:'2026-09-17',tags:['educación','CFPA','Puesto Chañar','oficios','agropecuaria']},
+      {id:'esc273',name:'Escuela Primaria N° 273 Carlos Julio Sang',subcategory:'Primaria',status:'verified',confidence:'high',sourceType:'official',source:'Argentina.gob.ar / ORSEP',sourceUrl:'https://www.argentina.gob.ar/node/429820',verifiedAt:'2026-09-17',tags:['educación','primaria','escuela 273']},
+      {id:'escuela364',name:'Escuela Primaria N° 364',category:'Educación',subcategory:'Primaria',status:'verified',confidence:'high',address:'Entre Lago Aluminé, Arroyo Covunco y Av. Ignacio Roberto Gasparri Sur',description:'Nuevo edificio inaugurado el 6 de marzo de 2026.',sourceType:'official',source:'Consejo Provincial de Educación del Neuquén',sourceUrl:'https://www.neuquen.edu.ar/tag/escuela-364/',verifiedAt:'2026-09-17',tags:['educación','primaria','escuela 364','edificio nuevo']},
+      {id:'epet26',name:'EPET N° 26',category:'Educación',subcategory:'Secundaria técnica',status:'verified',confidence:'high',address:'Av. Malvinas Argentinas, Pehuén y Alerce',description:'Institución vigente; durante 2026 su edificio propio continúa en obra.',sourceType:'official',source:'Boletín Oficial del Neuquén / Gobierno del Neuquén',sourceUrl:'https://infoleg.neuquen.gov.ar/LeyesDecretosDetalle?id=413986',verifiedAt:'2026-09-17',tags:['educación','técnica','EPET','obra']},
+      {id:'cpem31',name:'CPEM N° 31',category:'Educación',subcategory:'Secundaria',status:'verified',confidence:'high',address:'Complejo El Chocón s/n',phone:'0299 485-5095',sourceType:'official',source:'Consejo Provincial de Educación del Neuquén',sourceUrl:'https://www.neuquen.edu.ar/wp-content/uploads/2019/08/Correos-de-escuelas-de-Neuqu%C3%A9n-.pdf',verifiedAt:'2026-09-17',tags:['educación','secundaria','CPEM 31']},
+      {id:'jardin67',name:'Jardín de Infantes N° 67',category:'Educación',subcategory:'Inicial',status:'verified',confidence:'high',sourceType:'official',source:'Boletín Oficial del Neuquén',sourceUrl:'https://infoleg.neuquen.gov.ar/LeyesDecretosDetalle?Id=426019',verifiedAt:'2026-09-17',tags:['educación','inicial','jardín']},
+      {id:'cef',name:'Centro de Educación Física N° 10',category:'Deporte',subcategory:'Educación física',status:'verified',confidence:'high',description:'Centro de Educación Física N° 10; en 2026 se ejecutan mejoras del playón e instalaciones exteriores.',sourceType:'official',source:'Consejo Provincial de Educación del Neuquén',sourceUrl:'https://www.neuquen.edu.ar/comenzaron-trabajos-para-la-mejora-del-cef-10/',verifiedAt:'2026-09-17',tags:['deporte','CEF 10','natatorio','playón']},
+      {id:'mun-spc',name:'Municipalidad de San Patricio del Chañar',category:'Instituciones',subcategory:'Gobierno local',status:'verified',confidence:'high',address:'Quili Malal 314',phone:'+54 299 408-4225',sourceType:'official',source:'Municipalidad de San Patricio del Chañar',sourceUrl:'https://sanpatricio.gob.ar/',verifiedAt:'2026-09-17',tags:['municipalidad','gobierno','trámites']},
+      {id:'hospital-spc',name:'Hospital Dra. Alicia Cruz',category:'Salud',subcategory:'Hospital',status:'verified',confidence:'high',address:'Arroyito s/n',phone:'0299 485-5084',sourceType:'official',source:'Gobierno de la Provincia del Neuquén',sourceUrl:'https://boletinoficial.neuquen.gov.ar/LeyesDecretosDetalle?Id=420163',verifiedAt:'2026-09-17',tags:['salud','hospital','emergencias']},
+      {id:'registro-civil',name:'Registro Civil · Seccional San Patricio del Chañar',category:'Instituciones',subcategory:'Registro público',status:'verified',confidence:'high',address:'Michay 100',sourceType:'official',source:'Registro Civil / Gobierno del Neuquén',sourceUrl:'https://registrocivil.neuquen.gob.ar/oficinas-del-registro-civil-abren-este-domingo-para-entrega-de-dni/',verifiedAt:'2026-09-17',tags:['registro civil','trámites','DNI']},
+      {id:'bomberos',name:'Cuartel de Bomberos N° 5 Sub. Of. Myr. (R.) Enrique Félix Moya',category:'Instituciones',subcategory:'Emergencias',status:'verified',confidence:'high',address:'Lago Ramos Mejía',phone:'+54 299 485-5523',sourceType:'business-directory',source:'Ficha cartográfica pública consultada 17/09/2026',sourceUrl:'https://www.google.com/maps/search/?api=1&query=Cuartel+de+Bomberos+N%C2%B0+5+San+Patricio+del+Chañar',verifiedAt:'2026-09-17',tags:['bomberos','emergencias','cuartel 5']},
+      {id:'club-san-patricio',name:'Club Atlético San Patricio',category:'Deporte',subcategory:'Club deportivo',status:'verified',confidence:'high',description:'Club Atlético San Patricio; el Estadio Municipal Juan Bautista Jara es sede del club.',sourceType:'official',source:'Municipalidad de San Patricio del Chañar',sourceUrl:'https://sanpatricio.gob.ar/nuestra',verifiedAt:'2026-09-17',tags:['deporte','fútbol','club']},
+      {id:'polideportivo',status:'retired',replacementId:'estadio',note:'Registro demasiado ambiguo para publicación hasta contar con denominación física inequívoca.'},
+      {id:'estadio',name:'Estadio Municipal Juan Bautista Jara',category:'Deporte',subcategory:'Estadio',status:'verified',confidence:'high',address:'Av. Gasparri Norte',description:'Estadio municipal y sede del Club Atlético San Patricio.',sourceType:'official',source:'Municipalidad de San Patricio del Chañar',sourceUrl:'https://sanpatricio.gob.ar/nuestra',verifiedAt:'2026-09-17',tags:['deporte','estadio','identidad']},
+      {id:'plaza-ninos',name:'Plaza de las Infancias',category:'Territorio',subcategory:'Espacio público',status:'verified',confidence:'high',address:'Entre Complejo Chocón y Av. Roberto Gasparri Sur',description:'Espacio público restaurado en 2022 con juegos y pista de skate.',sourceType:'official',source:'Municipalidad de San Patricio del Chañar',sourceUrl:'https://sanpatricio.gob.ar/nuestra',verifiedAt:'2026-09-17',tags:['plaza','infancias','skate','familias']},
+      {id:'centro-cultural',name:'Centro Cultural Erika Barión de Werro',category:'Cultura',subcategory:'Centro cultural',status:'verified',confidence:'high',description:'Centro cultural inaugurado en 2013 con auditorio y actividades culturales.',sourceType:'official',source:'Municipalidad de San Patricio del Chañar',sourceUrl:'https://sanpatricio.gob.ar/nuestra',verifiedAt:'2026-09-17',tags:['cultura','teatro','cine','auditorio']},
+      {id:'balneario',name:'Balneario Municipal',category:'Turismo',subcategory:'Recreación',status:'verified',confidence:'high',description:'Predio recreativo sobre un brazo del Río Neuquén con piletones, camping, parrillas, baños, duchas, canchas, playón y sendas. Algunos servicios son estacionales.',sourceType:'official',source:'Municipalidad de San Patricio del Chañar',sourceUrl:'https://sanpatricio.gob.ar/nuestra',verifiedAt:'2026-09-17',tags:['turismo','río','balneario','camping','familias']},
+      {id:'mirador-virgen',name:'Mirador La Virgen',category:'Turismo',subcategory:'Mirador',status:'verified',confidence:'high',address:'Calle 11 Norte, aproximadamente 2 km desde la intersección de RP 7 y RP 8',description:'Mirador turístico sobre las bardas con vista hacia el valle productivo.',sourceType:'official',source:'Municipalidad de San Patricio del Chañar',sourceUrl:'https://sanpatricio.gob.ar/nuestra',verifiedAt:'2026-09-17',tags:['turismo','mirador','bardas','territorio']},
+      {id:'chacra-valles-chanar',name:'Chacra Municipal “Valles del Chañar”',category:'Producción',subcategory:'Producción agropecuaria',status:'verified',confidence:'high',address:'Picada N° 5',description:'Chacra municipal de 10 hectáreas donde producen familias locales, con riego e invernaderos.',sourceType:'official',source:'Municipalidad de San Patricio del Chañar',sourceUrl:'https://sanpatricio.gob.ar/nuestra',verifiedAt:'2026-09-17',tags:['producción','chacra','riego','invernaderos']},
+      {id:'dique-compensador',name:'Dique Compensador',category:'Territorio',subcategory:'Área natural protegida',status:'verified',confidence:'high',description:'Área natural vinculada al Río Neuquén, con acceso por RP 7 y RP 8; declarada Área Natural Protegida Municipal en 2006.',sourceType:'official',source:'Municipalidad de San Patricio del Chañar',sourceUrl:'https://sanpatricio.gob.ar/nuestra',verifiedAt:'2026-09-17',tags:['río','dique','territorio','naturaleza']},
+      {id:'corralon-pitty',name:'Corralón Pitty',category:'Comercio',subcategory:'Materiales / ferretería',status:'verified',confidence:'medium',address:'Río Neuquén Mza G2 Lote 11 y 12',phone:'+54 299 485-5419',description:'Comercio local de materiales y ferretería.',sourceType:'business-directory',source:'Ficha cartográfica pública consultada 17/09/2026',sourceUrl:'https://www.google.com/maps/search/?api=1&query=Corralón+Pitty+San+Patricio+del+Chañar',verifiedAt:'2026-09-17',tags:['comercio','materiales','ferretería']}
+    ]
   };
 
-  const basePlaces = (source.places || []).map(mergePlace).filter(Boolean);
-  const baseIds = new Set(basePlaces.map(x => x.id));
-  const newVerified = (verifiedLayer.places || []).filter(x => !baseIds.has(x.id) && x.status !== 'retired');
-  const mergedPlaces = [...basePlaces, ...newVerified];
+  const corrections=new Map(audited.places.map(x=>[x.id,x]));
+  const retired=new Set(audited.places.filter(x=>x.status==='retired').map(x=>x.id));
+  const mergePlace=base=>retired.has(base.id)?null:(corrections.has(base.id)?{...base,...corrections.get(base.id)}:base);
+  const basePlaces=(source.places||[]).map(mergePlace).filter(Boolean);
+  const baseIds=new Set(basePlaces.map(x=>x.id));
+  const newVerified=audited.places.filter(x=>!baseIds.has(x.id)&&x.status!=='retired');
+  const mergedPlaces=[...basePlaces,...newVerified];
 
-  const normalize = (x, entityType) => {
-    const hasCoordinates = Number.isFinite(x.lat) && Number.isFinite(x.lon);
-    const hasGeometry = !!x.geometry;
-    const status = x.status === 'verified' ? 'verified' : 'pending';
-    const spatialStatus = entityType === 'territory'
-      ? (hasGeometry ? 'verified' : 'pending')
-      : (hasCoordinates ? 'located' : (x.address ? 'address_verified' : 'unlocated'));
-    return Object.freeze({
-      ...x,
-      entityType,
-      identityKey: `${entityType}:${x.id}`,
-      publication: status === 'verified' && (entityType === 'territory' ? hasGeometry : (hasCoordinates || !!x.address)) ? 'published' : 'pending',
-      spatialStatus,
-      audit: Object.freeze({
-        hasId: !!x.id,
-        hasName: !!x.name,
-        hasCategory: !!x.category,
-        hasSource: !!x.source,
-        hasSourceUrl: !!x.sourceUrl,
-        hasVerificationDate: /^\d{4}-\d{2}-\d{2}$/.test(String(x.verifiedAt || '')),
-        hasSpatialReference: entityType === 'territory' ? hasGeometry : (hasCoordinates || !!x.address),
-        auditedLayer: !!x.verifiedAt && !!x.sourceUrl
-      })
-    });
+  const normalize=(x,entityType)=>{
+    const hasCoordinates=Number.isFinite(x.lat)&&Number.isFinite(x.lon),hasGeometry=!!x.geometry,status=x.status==='verified'?'verified':'pending';
+    const spatialStatus=entityType==='territory'?(hasGeometry?'verified':'pending'):(hasCoordinates?'located':(x.address?'address_verified':'unlocated'));
+    return Object.freeze({...x,entityType,identityKey:`${entityType}:${x.id}`,publication:status==='verified'&&(entityType==='territory'?hasGeometry:(hasCoordinates||!!x.address))?'published':'pending',spatialStatus,audit:Object.freeze({hasId:!!x.id,hasName:!!x.name,hasCategory:!!x.category,hasSource:!!x.source,hasSourceUrl:!!x.sourceUrl,hasVerificationDate:/^\d{4}-\d{2}-\d{2}$/.test(String(x.verifiedAt||'')),hasSpatialReference:entityType==='territory'?hasGeometry:(hasCoordinates||!!x.address),auditedLayer:!!x.verifiedAt&&!!x.sourceUrl})});
   };
-
-  const places = mergedPlaces.map(x => normalize(x, 'place'));
-  const territories = (territory.territories || []).map(x => normalize(x, 'territory'));
-  const all = [...places, ...territories];
-  const ids = new Set();
-  const duplicateIds = [];
-  for (const item of all) {
-    if (ids.has(item.identityKey)) duplicateIds.push(item.identityKey);
-    ids.add(item.identityKey);
-  }
-
-  window.CHANAR_REGISTRY = Object.freeze({
-    schemaVersion: '1.1',
-    updated: verifiedLayer.checkedAt || new Date().toISOString().slice(0, 10),
-    name: 'Inventario Canónico de Chañar',
-    owner: 'Chañar HUB · Ocarina Producciones',
-    lifecycle: ['descubierto', 'documentado', 'verificado', 'publicado'],
-    categories: Object.freeze([...new Set([...(source.categories || []), ...(places.map(x => x.category).filter(Boolean))])]),
-    places: Object.freeze(places),
-    territories: Object.freeze(territories),
-    all: Object.freeze(all),
-    audit: Object.freeze({
-      total: all.length,
-      places: places.length,
-      territories: territories.length,
-      locatedPlaces: places.filter(x => x.spatialStatus === 'located').length,
-      addressVerifiedPlaces: places.filter(x => x.spatialStatus === 'address_verified').length,
-      pendingPlaces: places.filter(x => x.publication === 'pending').length,
-      auditedPlaces: places.filter(x => x.audit.auditedLayer).length,
-      retiredRecords: retired.size,
-      duplicateIdentityKeys: Object.freeze(duplicateIds)
-    })
-  });
+  const places=mergedPlaces.map(normalize.bind(null));
+  const territories=(territory.territories||[]).map(x=>normalize(x,'territory'));
+  const all=[...places,...territories],ids=new Set(),duplicateIds=[];
+  for(const item of all){if(ids.has(item.identityKey))duplicateIds.push(item.identityKey);ids.add(item.identityKey)}
+  window.CHANAR_REGISTRY=Object.freeze({schemaVersion:'1.1',updated:audited.checkedAt,name:'Inventario Canónico de Chañar',owner:'Chañar HUB · Ocarina Producciones',lifecycle:['descubierto','documentado','verificado','publicado'],categories:Object.freeze([...new Set([...(source.categories||[]),...places.map(x=>x.category).filter(Boolean)])]),places:Object.freeze(places),territories:Object.freeze(territories),all:Object.freeze(all),audit:Object.freeze({total:all.length,places:places.length,territories:territories.length,locatedPlaces:places.filter(x=>x.spatialStatus==='located').length,addressVerifiedPlaces:places.filter(x=>x.spatialStatus==='address_verified').length,pendingPlaces:places.filter(x=>x.publication==='pending').length,auditedPlaces:places.filter(x=>x.audit.auditedLayer).length,retiredRecords:retired.size,duplicateIdentityKeys:Object.freeze(duplicateIds)})});
 })();
