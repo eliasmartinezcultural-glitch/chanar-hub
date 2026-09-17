@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0",
+  "name": "Chañar HUB · Política de autoactualización segura",
+  "effectiveDate": "2026-09-17",
+  "principle": "verificar automáticamente, publicar con evidencia, nunca inventar",
+  "automaticChecks": [
+    "HTTP y redirecciones de fuentes",
+    "presencia de nombres o frases esperadas",
+    "detección de fuentes que dejan de responder",
+    "detección de cambios que requieren revisión humana",
+    "registro de fecha y hora de cada comprobación"
+  ],
+  "neverAutoChangeWithoutReview": [
+    "coordenadas",
+    "teléfonos",
+    "horarios",
+    "direcciones ambiguas",
+    "nombre canónico de una institución",
+    "estado operativo de un servicio",
+    "cierre, traslado o reapertura"
+  ],
+  "sourcePriority": [
+    "organismo oficial",
+    "normativa o boletín oficial",
+    "sitio institucional",
+    "fuente cartográfica pública",
+    "directorio comercial como evidencia auxiliar"
+  ],
+  "publicSafety": "Los datos de emergencia deben contrastarse con el organismo correspondiente antes de tratarlos como operativos en tiempo real."
+}
