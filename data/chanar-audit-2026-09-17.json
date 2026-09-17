@@ -1,0 +1,52 @@
+{
+  "project": "Chañar HUB",
+  "auditDate": "2026-09-17",
+  "scope": "auditoría quirúrgica de nombres, existencia, utilidad, dirección, estado y fuentes públicas de San Patricio del Chañar",
+  "policy": {
+    "officialFirst": true,
+    "neverInvent": true,
+    "coordinatesRequireSpatialEvidence": true,
+    "temporaryLocationsMustBeDated": true,
+    "projectsAreNotPlaces": true
+  },
+  "backup": {
+    "branch": "backup/pre-audit-2026-09-17",
+    "baseCommit": "65f8745ee716bbba18c6f1c57335914f2fc5bd0f",
+    "purpose": "punto de restauración previo a la auditoría"
+  },
+  "verifiedCorrections": [
+    {"oldId":"emeta","action":"retire","newId":"epea3","reason":"nombre actual de la institución: EPEA N° 3"},
+    {"oldId":"centro-formacion-agropecuaria","action":"replaceName","newName":"Centro de Formación Profesional Agropecuaria N° 2 “Puesto Chañar”","address":"Av. Gasparri Norte y Alerces"},
+    {"oldId":"esc273","action":"replaceName","newName":"Escuela Primaria N° 273 Carlos Julio Sang"},
+    {"oldId":"cef","action":"replaceName","newName":"Centro de Educación Física N° 10"},
+    {"oldId":"plaza-ninos","action":"replaceName","newName":"Plaza de las Infancias"},
+    {"oldId":"centro-cultural","action":"replaceName","newName":"Centro Cultural Erika Barión de Werro"},
+    {"oldId":"club-san-patricio","action":"replaceName","newName":"Club Atlético San Patricio"},
+    {"oldId":"estadio","action":"add","newName":"Estadio Municipal Juan Bautista Jara"},
+    {"oldId":"registro-civil","action":"replaceLocation","newAddress":"Michay 100","reason":"sede publicada para San Patricio del Chañar"},
+    {"oldId":"municipalidad","action":"replaceAddress","newAddress":"Quili Malal 314"},
+    {"oldId":"hospital-spc","action":"replaceNameAndAddress","newName":"Hospital Dra. Alicia Cruz","newAddress":"Arroyito s/n"},
+    {"oldId":"epet26","action":"addCurrentStatus","reason":"institución vigente; edificio propio en obra durante 2026"},
+    {"oldId":"escuela364","action":"add","reason":"nuevo edificio inaugurado el 06/03/2026"}
+  ],
+  "sourceRegister": [
+    {"name":"Municipalidad de San Patricio del Chañar","url":"https://sanpatricio.gob.ar/","type":"official"},
+    {"name":"Municipalidad · Nuestra Ciudad","url":"https://sanpatricio.gob.ar/nuestra","type":"official"},
+    {"name":"Municipalidad · Qué hacer","url":"https://sanpatricio.gob.ar/quehacer","type":"official"},
+    {"name":"Municipalidad · Trámites","url":"https://www.sanpatricio.gob.ar/tramites","type":"official"},
+    {"name":"CPE Neuquén · trayectos formativos","url":"https://www.neuquen.edu.ar/_trayectos_formativos_partial/","type":"official"},
+    {"name":"CPE Neuquén · Escuela 364","url":"https://www.neuquen.edu.ar/tag/escuela-364/","type":"official"},
+    {"name":"CPE Neuquén · CEF 10","url":"https://www.neuquen.edu.ar/comenzaron-trabajos-para-la-mejora-del-cef-10/","type":"official"},
+    {"name":"Boletín Oficial Neuquén · EPEA 3","url":"https://boficial.neuquen.gov.ar/LeyesDecretosDetalle?Id=426027","type":"official"},
+    {"name":"Boletín Oficial Neuquén · EPET 26","url":"https://infoleg.neuquen.gov.ar/LeyesDecretosDetalle?id=413986","type":"official"},
+    {"name":"Registro Civil Neuquén","url":"https://registrocivil.neuquen.gob.ar/oficinas-del-registro-civil-abren-este-domingo-para-entrega-de-dni/","type":"official"},
+    {"name":"UPEFE · EPEA 3","url":"https://www.upefe.gob.ar/ampliacion-epea-3/","type":"official"},
+    {"name":"Argentina.gob.ar · Escuela 273","url":"https://www.argentina.gob.ar/node/429820","type":"official"}
+  ],
+  "knownLimitations": [
+    "Las coordenadas no se consideran verificadas solo por coincidir con una ficha de buscador.",
+    "Los horarios comerciales y servicios estacionales deben comprobarse antes de mostrarse como 'abierto ahora'.",
+    "Las obras en ejecución se registran como proyecto/obra y no como infraestructura terminada.",
+    "La capa anterior geo-data.js permanece como historial; la capa de verificación tiene prioridad en el inventario canónico."
+  ]
+}
