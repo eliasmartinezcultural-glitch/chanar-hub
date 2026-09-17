@@ -1,5 +1,9 @@
 /* CHANAR HUB — INVENTARIO CANÓNICO */
 (function () {
+  const ui = document.createElement('link');
+  ui.rel = 'stylesheet';
+  ui.href = 'chanar-ui.css';
+  document.head.appendChild(ui);
   const source = window.CHANAR_GEO || { categories: [], places: [] };
   const territory = window.CHANAR_TERRITORY || { territories: [] };
   const normalize = (x, entityType) => {
