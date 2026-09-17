@@ -8,7 +8,8 @@
     "ui": "chanar-ui.css",
     "audit": "data/chanar-audit-2026-09-17.json",
     "sourceAudit": "scripts/source-audit.mjs",
-    "integrity": "scripts/integrity-check.mjs"
+    "integrity": "scripts/integrity-check.mjs",
+    "experience": "chanar-hub-core.js"
   },
   "views": [
     "index.html",
@@ -27,7 +28,8 @@
     "Fuentes oficiales primero.",
     "Mobile-first y táctil.",
     "Compartir debe ser simple y profesional.",
-    "Toda nueva función debe reutilizar la base estable."
+    "Toda nueva función debe reutilizar la base estable.",
+    "La navegación común debe ser una sola capa compartida por todas las vistas."
   ],
   "protectedFromAccidentalDuplication": true,
   "integrityWorkflow": ".github/workflows/integrity.yml"
