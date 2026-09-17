@@ -1,1 +1,119 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#355b3d"><meta name="description" content="Chañar HUB · una guía sencilla para encontrar lugares, servicios y territorio de San Patricio del Chañar."><title>Chañar HUB · San Patricio del Chañar</title><link rel="stylesheet" href="chanar-ui.css"></head><body><div class="wrap"><header class="top"><div class="brand">CHAÑAR<br><span>HUB</span></div><nav class="nav" aria-label="Navegación principal"><a class="pill" href="index.html" aria-current="page">Inicio</a><a class="pill" href="viajero.html">✈️ Viajero</a><a class="pill" href="vecinos.html">🏠 Vecinos</a><a class="pill" href="mapa.html">🗺️ Mapa</a></nav></header><main><section class="hero"><div class="hero-in"><div class="ey">San Patricio del Chañar · Neuquén</div><h1>Hola.<br>Esto es Chañar.</h1><p><strong>Una guía hecha para ayudar.</strong> No necesitás saber de tecnología. Elegí lo que buscás y te mostramos el camino.</p><div class="actions"><a class="btn primary" href="viajero.html">✈️ Estoy llegando</a><a class="btn blue" href="vecinos.html">🏠 Vivo acá</a><a class="btn" href="mapa.html">🗺️ Quiero mirar el mapa</a></div></div></section><section class="section"><div class="head sectionhead"><div><h2>¿Qué necesitás?</h2><p>Elegí una opción. Después te acompañamos.</p></div></div><div class="modes"><a class="mode" href="viajero.html"><div class="ey">Si estás llegando</div><h2>✈️ Viajero</h2><p>Dónde dormir, comer, cargar combustible, atenderte, arreglar el auto, visitar lugares o seguir viaje.</p><div class="go">Necesito resolver algo →</div></a><a class="mode" href="vecinos.html"><div class="ey">Si vivís acá</div><h2>🏠 Vecinos</h2><p>Salud, escuelas, trámites, instituciones, deporte, comercios, cultura y servicios de todos los días.</p><div class="go">Necesito algo de Chañar →</div></a></div></section><section class="section"><div class="paper emergency"><div class="head"><h2>🚨 Si es una emergencia</h2><p>Si estás usando un teléfono, tocá el número para llamar.</p></div><div class="emgrid"><a class="btn red" href="tel:107">🚑 <b>107 · Salud</b></a><a class="btn red" href="tel:100">🔥 <b>100 · Bomberos</b></a><a class="btn red" href="tel:103">🛡️ <b>103 · Defensa Civil</b></a></div></div></section><section class="section" id="buscar"><div class="paper"><div class="head"><h2>🔎 ¿Buscás un lugar?</h2><p>Podés escribir el nombre o algo parecido.</p></div><div class="search"><label class="sr-only" for="q">Qué buscás</label><input id="q" placeholder="Ej.: hospital, escuela, bodega, club"><button class="btn primary" id="buscar">Buscar</button></div><div id="result" class="result"></div></div></section><section class="section"><div class="note"><b>🌿 Chañar HUB está hecho acá.</b><br>La idea es sencilla: que una persona que conoce poco de tecnología pueda encontrar ayuda sin tener que aprender a usar una página nueva.</div></section></main><footer class="footer">Chañar HUB · San Patricio del Chañar<br>Una guía local de Ocarina Producciones · Historias · personas · territorio</footer></div><script src="geo-data.js"></script><script src="geo-territory.js"></script><script src="chanar-registry.js"></script><script>const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const norm=s=>String(s??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();const data=()=>window.CHANAR_REGISTRY?.places||[];function score(x,q){let n=norm(x.name),c=norm(x.category),sub=norm(x.subcategory),d=norm(x.description),t=norm((x.tags||[]).join(' ')),s=0;if(n===q)s=120;else if(n.startsWith(q))s=75;else if(n.includes(q))s=50;else if([c,sub,t,d].join(' ').includes(q))s=25;if(x.status==='verified')s+=10;if(Number.isFinite(x.lat)&&Number.isFinite(x.lon))s+=5;return s}function buscar(){let q=norm(document.getElementById('q').value.trim()),o=document.getElementById('result');if(!q){o.innerHTML='';return}let h=data().map(x=>[score(x,q),x]).filter(a=>a[0]>0).sort((a,b)=>b[0]-a[0]).slice(0,8).map(a=>a[1]);if(!h.length){o.innerHTML='<div class="empty"><b>No encontramos ese lugar todavía.</b><p>Probá con otra palabra o entrá a Viajero, Vecinos o Mapa.</p></div>';return}o.innerHTML='<div class="results">'+h.map(x=>{let located=Number.isFinite(x.lat)&&Number.isFinite(x.lon),map=located?'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(x.lat+','+x.lon):'';return '<article class="card place"><div class="grow"><div class="rank">'+(x.status==='verified'?'Dato verificado':'Dato en revisión')+'</div><h3>'+esc(x.name)+'</h3><p>'+esc(x.category||'Lugar local')+(x.subcategory?' · '+esc(x.subcategory):'')+'</p>'+(x.address?'<p><b>Dirección:</b> '+esc(x.address)+'</p>':'')+'</div><div class="place-actions">'+(x.phone?'<a class="btn" href="tel:'+esc(String(x.phone).replace(/\s/g,''))+'">📞 Llamar</a>':'')+(map?'<a class="btn main" target="_blank" rel="noopener" href="'+map+'">🗺️ Cómo llegar</a>':'')+'</div></article>'}).join('')+'</div>'}document.getElementById('buscar').addEventListener('click',buscar);document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter')buscar()});</script></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#355b3d">
+<meta name="description" content="Chañar HUB: guía local para encontrar lugares, servicios, instituciones, comercios y territorio de San Patricio del Chañar.">
+<title>Chañar HUB · San Patricio del Chañar</title>
+<link rel="stylesheet" href="chanar-ui.css">
+<style>
+:root{--green:#355b3d;--green2:#274732;--cream:#f7efd9;--paper:#fffaf0;--ink:#243027;--muted:#5f6c61;--border:#d6c6a7;--blue:#2f6976;--red:#a83e32;--gold:#e8bd55}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:18px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:inherit}.wrap{max-width:1120px;margin:auto;padding:12px 14px 34px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.brand{font-size:31px;font-weight:1000;letter-spacing:-.08em;line-height:.72;color:var(--green)}.brand span{color:#7b5738}nav{display:flex;gap:7px;flex-wrap:wrap}.pill,.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:10px 15px;border:2px solid var(--green);border-radius:13px;background:var(--paper);text-decoration:none;font-weight:850;cursor:pointer}.pill{border-radius:99px;font-size:16px}.hero{margin-top:13px;padding:28px 22px;border-radius:24px;background:var(--green);color:#fff;box-shadow:0 5px 0 rgba(123,87,56,.2)}.ey{font-size:14px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:#ffe19a}.hero h1{font-size:clamp(2.8rem,8vw,5.5rem);line-height:.88;letter-spacing:-.07em;margin:12px 0}.hero p{max-width:760px;font-size:20px;margin:0;color:#edf4eb}.hero strong{color:#ffe19a}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.hero .primary{background:#ffe09a;border-color:#ffe09a;color:#263729}.section{margin:30px 0}.head{margin-bottom:12px}.head h2{font-size:28px;line-height:1.1;margin:0}.head p{margin:4px 0;color:var(--muted)}.paper,.card{background:var(--paper);border:2px solid var(--border);border-radius:19px;padding:18px;box-shadow:0 3px 0 rgba(123,87,56,.1)}.mission{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.mission .btn{min-height:112px;text-align:left;display:block}.mission .ico{font-size:34px;display:block}.mission b{display:block;font-size:20px}.mission small{color:var(--muted);font-size:15px}.searchbox{padding:16px;background:var(--paper);border:2px solid var(--border);border-radius:19px}.search{display:flex;gap:8px;flex-wrap:wrap}.search input{flex:1;min-width:230px;min-height:56px;border:2px solid var(--border);border-radius:12px;padding:10px 13px;background:#fff;font:inherit;color:var(--ink)}.search .btn{background:var(--green);border-color:var(--green);color:#fff}.suggestions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.suggestions button{min-height:40px;padding:7px 11px;border:1px solid var(--border);border-radius:999px;background:#fff;font-weight:700;cursor:pointer}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:13px}.stat{padding:12px;border:1px solid var(--border);border-radius:13px;background:#fff}.stat strong{display:block;font-size:24px}.stat span{color:var(--muted);font-size:14px}.results{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}.place{min-height:220px;display:flex;flex-direction:column}.place .grow{flex:1}.rank{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:#7b5738}.place h3{font-size:22px;line-height:1.15;margin:5px 0}.place p{margin:5px 0;color:var(--muted)}.place-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.place-actions .btn{min-height:46px;font-size:15px}.place-actions .main{background:var(--green);border-color:var(--green);color:#fff}.empty{padding:16px;border:2px dashed var(--border);border-radius:14px;background:#fff;margin-top:12px}.quickgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.quick{display:block;padding:17px;border:2px solid var(--border);border-radius:17px;background:var(--paper);text-decoration:none}.quick:hover{border-color:var(--green)}.quick b{font-size:21px}.quick p{margin:4px 0 0;color:var(--muted)}.emergency{background:#fff4f0;border-color:#d58a80}.emgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.emgrid .btn{border-color:var(--red);color:#762c25;background:#fff}.notice{padding:16px;border-radius:14px;background:#f1e6ce;border-left:6px solid #7b5738}.footer{margin:35px 0 8px;padding-top:18px;border-top:2px dashed var(--border);color:var(--muted);font-size:15px}.sr-only{position:absolute;left:-9999px}button:focus-visible,a:focus-visible,input:focus-visible{outline:4px solid var(--blue);outline-offset:3px}@media(max-width:850px){.mission{grid-template-columns:repeat(2,1fr)}.results{grid-template-columns:1fr}.emgrid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.wrap{padding:10px}.top nav{width:100%}.pill{flex:1;padding:9px 6px}.hero{padding:24px 17px}.hero p{font-size:19px}.hero .actions .btn{width:100%}.mission{grid-template-columns:1fr}.mission .btn{min-height:92px}.search input,.search .btn{width:100%;min-width:100%}.place-actions .btn{width:100%}.quickgrid{grid-template-columns:1fr}.stats{grid-template-columns:1fr}.emgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div class="brand">CHAÑAR<br><span>HUB</span></div>
+  <nav aria-label="Navegación principal">
+    <a class="pill" href="index.html" aria-current="page">Inicio</a>
+    <a class="pill" href="viajero.html">✈️ Viajero</a>
+    <a class="pill" href="vecinos.html">🏠 Vecinos</a>
+    <a class="pill" href="mapa.html">🗺️ Mapa</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero">
+  <div class="ey">San Patricio del Chañar · Neuquén</div>
+  <h1>Encontrá lo que necesitás.</h1>
+  <p><strong>Chañar HUB es una guía local.</strong> Buscá un lugar, elegí una necesidad o abrí el mapa. La información muestra cuándo un dato está verificado y cuándo todavía necesita revisión.</p>
+  <div class="actions">
+    <a class="btn primary" href="#buscar">🔎 Buscar algo</a>
+    <a class="btn" href="mapa.html">🗺️ Explorar mapa</a>
+    <a class="btn" href="viajero.html">✈️ Estoy de paso</a>
+  </div>
+</section>
+
+<section class="section" id="necesito">
+  <div class="head"><h2>¿Qué querés resolver?</h2><p>No necesitás saber el nombre exacto del lugar.</p></div>
+  <div class="mission">
+    <button class="btn" data-query="salud"><span class="ico">🏥</span><b>Salud</b><small>Hospital, atención, farmacia</small></button>
+    <button class="btn" data-query="comer"><span class="ico">🍽️</span><b>Comer</b><small>Restaurantes y comida</small></button>
+    <button class="btn" data-query="comprar"><span class="ico">🛒</span><b>Comprar</b><small>Comercios y servicios</small></button>
+    <button class="btn" data-query="escuela"><span class="ico">🎒</span><b>Estudiar</b><small>Escuelas e instituciones</small></button>
+    <button class="btn" data-query="deporte"><span class="ico">⚽</span><b>Deporte</b><small>Clubes y espacios</small></button>
+    <button class="btn" data-query="turismo"><span class="ico">🍇</span><b>Conocer</b><small>Turismo, bodegas, territorio</small></button>
+    <button class="btn" data-query="tramite"><span class="ico">📄</span><b>Trámites</b><small>Municipio e instituciones</small></button>
+    <button class="btn" data-query="auto"><span class="ico">🔧</span><b>Resolver</b><small>Auto, talleres y servicios</small></button>
+  </div>
+</section>
+
+<section class="section" id="buscar">
+  <div class="head"><h2>🔎 Buscador local</h2><p>Probá con una palabra, un nombre, una categoría o algo parecido.</p></div>
+  <div class="searchbox">
+    <div class="search">
+      <label class="sr-only" for="q">Qué buscás</label>
+      <input id="q" autocomplete="off" placeholder="Ej.: hospital, escuela, bodega, club, mecánico...">
+      <button class="btn" id="buscarBtn">Buscar</button>
+    </div>
+    <div class="suggestions" aria-label="Búsquedas rápidas">
+      <button data-query="hospital">🏥 Hospital</button><button data-query="escuela">🎒 Escuela</button><button data-query="bodega">🍇 Bodega</button><button data-query="club">⚽ Club</button><button data-query="farmacia">💊 Farmacia</button><button data-query="supermercado">🛒 Supermercado</button><button data-query="combustible">⛽ Combustible</button>
+    </div>
+    <div class="stats" id="stats"></div>
+    <div id="result" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="head"><h2>🧭 Accesos útiles</h2><p>Herramientas que resuelven algo concreto.</p></div>
+  <div class="quickgrid">
+    <a class="quick" href="viajero.html"><b>✈️ Guía para viajeros</b><p>Dormir, comer, cargar combustible, salud, auto, visitar y seguir viaje.</p></a>
+    <a class="quick" href="vecinos.html"><b>🏠 Guía para vecinos</b><p>Instituciones, educación, salud, deporte, cultura, comercios y servicios.</p></a>
+    <a class="quick" href="mapa.html"><b>🗺️ Mapa territorial</b><p>Explorá lugares y datos geográficos con la información disponible.</p></a>
+    <a class="quick" href="auditoria.html"><b>🔍 Auditoría de datos</b><p>Control interno del inventario: útil para mantener Chañar HUB actualizado.</p></a>
+  </div>
+</section>
+
+<section class="section" id="emergencias">
+  <div class="paper emergency">
+    <div class="head"><h2>🚨 Emergencias</h2><p>Estos números son generales en Argentina; para una emergencia, usá el servicio correspondiente. </p></div>
+    <div class="emgrid">
+      <a class="btn" href="tel:911">🚨 <b>911 · Emergencias</b></a>
+      <a class="btn" href="tel:100">🔥 <b>100 · Bomberos</b></a>
+      <a class="btn" href="tel:103">🛡️ <b>103 · Defensa Civil</b></a>
+      <a class="btn" href="tel:107">🚑 <b>107 · Emergencias médicas*</b></a>
+    </div>
+    <p style="font-size:13px;color:#6d6258;margin-bottom:0">*La disponibilidad de 107 depende de la jurisdicción. Chañar HUB debe confirmar localmente este dato antes de presentarlo como servicio municipal específico.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="notice"><b>🌿 Regla de Chañar HUB:</b> mejor mostrar “dato en revisión” que inventar un dato. El objetivo es construir una infraestructura local útil, mantenible y confiable.</div>
+</section>
+</main>
+
+<footer class="footer">Chañar HUB · San Patricio del Chañar · Ocarina Producciones<br>Historias · personas · territorio · guía local</footer>
+</div>
+
+<script src="geo-data.js"></script>
+<script src="geo-territory.js"></script>
+<script src="chanar-registry.js"></script>
+<script>
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm=s=>String(s??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+const registry=()=>window.CHANAR_REGISTRY?.places||[];
+function haystack(x){return [x.name,x.category,x.subcategory,x.description,x.address,x.source,...(x.tags||[])].map(norm).join(' ')}
+function score(x,q){const n=norm(x.name),t=haystack(x);if(!q)return 0;if(n===q)return 150;if(n.startsWith(q))return 100;if(n.includes(q))return 75;if(t.includes(q))return 35;const words=q.split(/\s+/).filter(Boolean);let hits=0;for(const w of words)if(t.includes(w))hits++;return hits?15*hits:0}
+function visibleStatus(x){if(x.status==='verified'&&Number.isFinite(x.lat)&&Number.isFinite(x.lon))return ['Dato verificado','verified'];if(x.status==='verified')return ['Verificado · falta ubicación','review'];return ['Dato en revisión','review']}
+function renderStats(){const d=registry();const located=d.filter(x=>Number.isFinite(x.lat)&&Number.isFinite(x.lon)).length;const verified=d.filter(x=>x.status==='verified').length;document.getElementById('stats').innerHTML=`<div class="stat"><strong>${d.length}</strong><span>registros locales</span></div><div class="stat"><strong>${located}</strong><span>con ubicación</span></div><div class="stat"><strong>${verified}</strong><span>verificados</span></div>`}
+function render(q){const result=document.getElementById('result');q=norm(q);if(!q){result.innerHTML='<div class="empty"><b>Empezá por una palabra.</b><p>Ejemplos: hospital, escuela, bodega, club, farmacia, supermercado o mecánico.</p></div>';return}const rows=registry().map(x=>[score(x,q),x]).filter(a=>a[0]>0).sort((a,b)=>b[0]-a[0]).slice(0,12).map(a=>a[1]);if(!rows.length){result.innerHTML='<div class="empty"><b>No encontramos ese dato todavía.</b><p>Probá con otra palabra o abrí el <a href="mapa.html"><b>Mapa</b></a>. Si falta información, eso también es un dato útil: nos indica qué debemos investigar.</p></div>';return}result.innerHTML='<div class="results">'+rows.map(x=>{const [label,kind]=visibleStatus(x);const located=Number.isFinite(x.lat)&&Number.isFinite(x.lon);const map=located?'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(x.lat+','+x.lon):'';const phone=x.phone?String(x.phone).replace(/\s+/g,''):'';return `<article class="card place"><div class="grow"><div class="rank ${kind}">${esc(label)}</div><h3>${esc(x.name)}</h3><p>${esc(x.category||'Lugar local')}${x.subcategory?' · '+esc(x.subcategory):''}</p>${x.address?`<p><b>Dirección:</b> ${esc(x.address)}</p>`:''}${x.description?`<p>${esc(x.description)}</p>`:''}</div><div class="place-actions">${phone?`<a class="btn" href="tel:${esc(phone)}">📞 Llamar</a>`:''}${map?`<a class="btn main" target="_blank" rel="noopener" href="${map}">🗺️ Cómo llegar</a>`:''}</div></article>`}).join('')+'</div>'}
+function go(q){document.getElementById('q').value=q;render(q);document.getElementById('result').scrollIntoView({behavior:'smooth',block:'start'})}
+document.getElementById('buscarBtn').addEventListener('click',()=>render(document.getElementById('q').value));
+document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter')render(e.currentTarget.value)});
+document.querySelectorAll('[data-query]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.query)));
+renderStats();render('');
+</script>
+</body>
+</html>
