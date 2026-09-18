@@ -50,4 +50,4 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-share]');i
 const params=new URLSearchParams(location.search); const id=params.get('id');
 if(id){const target=data.find(p=>p.id===id);if(target){active='Todos';query='';renderFilters();render();setTimeout(()=>document.getElementById('ficha-'+CSS.escape(id))?.scrollIntoView({behavior:'smooth',block:'center'}),80);}}
 
-</script></body></html>
+</script><script src="chanar-hub-core.js"></script>\n</body></html>
