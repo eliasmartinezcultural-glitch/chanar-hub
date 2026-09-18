@@ -33,7 +33,7 @@ const phones=x=>String(x.phone||"").split(/\s*\/\s*/).map(s=>s.trim()).filter(Bo
 const maps=x=>x.address?'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(x.name+" "+x.address+" San Patricio del Chañar"):"";
 
 function card(x){
- const phone=phones(x).map((p,i)=>'<a href="tel:'+p.replace(/\\D/g,"")+'">☎️ '+(phones(x).length>1?("Llamar "+(i+1)):"Llamar")+'</a>').join("");
+ const phone=phones(x).map((p,i)=>'<a href="tel:'+p.replace(/\D/g,"")+'">☎️ '+(phones(x).length>1?("Llamar "+(i+1)):"Llamar")+'</a>').join("");
  const map=x.address?'<a class="secondary" target="_blank" rel="noopener" href="'+maps(x)+'">📍 Cómo llegar</a>':"";
  const share='<button class="share" type="button" data-share="'+esc(x.id)+'">↗ Compartir</button>';
  const level=x.level==="oficial"?"Fuente oficial":x.level==="institucional"?"Fuente institucional":"Ficha local consultada"; const sourceLabel=x.level==="local"?"↗ Ver ficha":"↗ Fuente";
