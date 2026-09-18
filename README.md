@@ -1,88 +1,28 @@
 # Chañar HUB
 
-**Guía · Mapa · Territorio · San Patricio del Chañar**
+## Reinicio V2 · utilidad primero
 
-Chañar HUB es una infraestructura web local, liviana y sin instalación para **buscar, entender y resolver** necesidades cotidianas de vecinos y visitantes.
+Chañar HUB vuelve a empezar con un objetivo único:
 
-## Base consolidada · V1
+> **Que una persona en San Patricio del Chañar pueda resolver una necesidad concreta sin aprender a usar la página.**
 
-A partir del 17/09/2026, el proyecto entra en modo **base estable**. Las mejoras nuevas deben reutilizar esta arquitectura y no crear fuentes paralelas.
+Se eliminó deliberadamente la arquitectura anterior de múltiples capas, paneles, directorios, territorio, actualidad y funciones comunitarias.
 
-### Núcleo de datos
+### Núcleo inicial
 
-- `chanar-registry.js` = registro canónico.
-- `geo-data.js` = datos geográficos de apoyo.
-- `geo-territory.js` = territorio físico.
-- `data/` = auditorías y evidencia.
-- Regla: **un dato → un registro canónico → múltiples vistas**.
+1. **Emergencias**: números útiles visibles inmediatamente.
+2. **Resolver**: salud, auto, combustible, dormir, comer, visitar.
+3. **Buscar**: una caja simple.
+4. **Referencias útiles**: pocos lugares, con teléfono, dirección, mapa y fuente cuando existe.
 
-### Confianza
+### Regla
 
-- Fuentes oficiales primero.
-- No inventar teléfonos, horarios, coordenadas, servicios ni estados operativos.
-- Dirección y coordenada son campos diferentes.
-- Diferenciar lugar publicado, revisión pendiente, ubicación temporal y proyecto/obra.
-- La auditoría documenta qué se sabe y qué falta comprobar.
+Si una función no ayuda a resolver algo concreto, **no entra**.
 
-### Experiencia
+No se inventan teléfonos, horarios, direcciones ni coordenadas. Los datos sensibles deben tener fuente y fecha de comprobación.
 
-`BUSCAR → FICHA → ¿QUÉ NECESITÁS HACER? → ACCIÓN`
+La información provincial actualmente publicada confirma 107 para emergencias médicas, 100 bomberos, 101 policía, 103 Defensa Civil, 149 siniestros viales y 148 asistencia en violencia. El Ministerio de Salud identifica el Hospital San Patricio del Chañar “Dra. Alicia Cruz”; Turismo Neuquén publica la Hostería/Posada El Chañar y el circuito turístico local. 
 
-Las vistas principales son:
+### Futuro
 
-- `index.html` · entrada y buscador.
-- `vecinos.html` · necesidades locales.
-- `viajero.html` · utilidad para visitantes.
-- `mapa.html` · territorio y fichas geográficas.
-- `auditoria.html` · control y confianza.
-- `compartir.html` · distribución por enlace, WhatsApp y redes.
-
-### Fuentes vivas y actualización automática
-
-Chañar HUB separa **información estructural** de **información dinámica**:
-
-- `chanar-registry.js` sigue siendo la fuente canónica de lugares y fichas.
-- `data/live-sources.json` concentra las fuentes externas vigentes.
-- `data/live-news.json` recibe novedades locales filtradas desde fuentes con RSS.
-- `chanar-live.js` muestra esa actualidad sin convertirla en datos canónicos.
-- `.github/workflows/live-sources.yml` refresca las novedades automáticamente cada 3 horas y también permite ejecución manual.
-- Las noticias no modifican automáticamente teléfonos, direcciones, coordenadas ni estados de los registros: una noticia nunca contamina la base estructural.
-
-Fuentes incorporadas: Municipalidad de San Patricio del Chañar, Neuquén Informa, EPEN, Ministerio de Salud del Neuquén, Turismo Neuquén y Chañar Digital.
-
-### Mobile y distribución
-
-- Mobile-first y táctil.
-- Sin scroll horizontal intencional.
-- Botones grandes y acciones claras.
-- Compartir nativo cuando el navegador lo permite.
-- WhatsApp y copia de enlace como caminos directos.
-- Metadatos sociales preparados en la página de distribución.
-- GitHub Pages mantiene el proyecto como sitio estático y sin instalación. La actualidad se precalcula mediante GitHub Actions para que el celular no tenga que consultar múltiples sitios externos.
-
-### Protección de la base
-
-`node scripts/integrity-check.mjs` verifica archivos núcleo, contratos del registro, viewport/title de las páginas y sintaxis JavaScript.
-
-GitHub Actions ejecuta ese control en cada push y pull request hacia `main`.
-
-## Regla de desarrollo
-
-Antes de agregar una función:
-
-1. **Reutilizar** lo existente.
-2. **Conectar** antes que duplicar.
-3. **Consolidar** antes que crear otra capa.
-4. **Auditar** antes de publicar datos nuevos.
-5. **Probar** antes de declarar algo terminado.
-6. Si una mejora rompe una pieza estable, **se corrige o se revierte**.
-
-## Principios
-
-- Web primero: sin instalación.
-- Ligero: HTML, CSS y JavaScript puro.
-- Mobile-first.
-- Información real y verificable.
-- Utilidad primero, identidad después.
-- Crecer por módulos, no por acumulación.
-- Una ficha canónica puede alimentar Inicio, Vecinos, Viajero y Mapa.
+Solo se agregará una función si responde a una necesidad real y mantiene la interfaz pequeña, rápida y usable desde un celular viejo.
