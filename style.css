@@ -85,3 +85,25 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;ba
 
 /* LENGUAJE VISUAL CHAÑAR HUB: patrones livianos de viña, río, ruta y barda. */
 .cha-strip{height:22px;margin:1px 18px 1px;display:flex;align-items:center;justify-content:center;gap:12px;opacity:.55;overflow:hidden;pointer-events:none}.cha-strip span{color:var(--green2);font-size:.72rem}.strip-vine i{width:28px;height:7px;border-bottom:2px solid var(--green2);border-radius:0 0 60% 60%;transform:rotate(-7deg)}.strip-vine i:nth-child(2){transform:rotate(7deg);margin-top:5px}.strip-vine span{margin-left:-3px}.strip-river span{font-family:Georgia,serif;font-size:1rem;color:var(--blue);letter-spacing:.12em}.strip-road{gap:18px}.strip-road span{display:block;width:42px;height:3px;border-radius:99px;background:var(--sun);transform:rotate(-5deg)}.strip-road span:nth-child(2){width:54px}.strip-road span:nth-child(3){width:34px}.strip-barda{gap:0;justify-content:flex-end;padding-right:8%}.strip-barda span{width:75px;height:18px;border-top:2px solid #9b7b52;border-radius:50%;opacity:.45}.strip-barda span:nth-child(2){width:48px;margin-left:-18px;margin-top:8px}.strip-barda span:nth-child(3){width:90px;margin-left:-14px}.section{position:relative}.section:before{content:"";position:absolute;left:0;top:-8px;width:28px;height:2px;background:var(--sun);opacity:.45}.emergency + .cha-strip{margin-top:2px}@media(max-width:620px){.cha-strip{margin-left:8px;margin-right:8px}}
+
+/* EXPERIENCIA MÓVIL · Chañar HUB */
+body{min-height:100vh}
+.offline-bar{display:none;position:fixed;z-index:50;left:8px;right:8px;top:8px;padding:8px 12px;border-radius:12px;background:#173b2d;color:#fffaf0;text-align:center;font-size:.76rem;font-weight:800;box-shadow:0 8px 22px rgba(0,0,0,.16)}
+body.is-offline .offline-bar{display:block}
+.mobile-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:-2px 1px 10px;padding:6px;background:rgba(255,250,240,.88);border:1px solid rgba(205,187,151,.8);border-radius:15px;box-shadow:0 8px 22px rgba(23,59,45,.07);position:sticky;top:7px;z-index:20;backdrop-filter:blur(10px)}
+.mobile-nav a,.mobile-nav button{min-height:40px;display:flex;align-items:center;justify-content:center;border:0;border-radius:10px;background:transparent;color:var(--green);text-decoration:none;font-size:.72rem;font-weight:900}
+.mobile-nav a:active,.mobile-nav button:active{background:#eee2c8}
+.top-button{position:fixed;right:14px;bottom:18px;z-index:30;width:46px;height:46px;border:2px solid var(--green);border-radius:50%;background:var(--paper);color:var(--green);font-size:1.25rem;font-weight:900;box-shadow:0 10px 24px rgba(23,59,45,.18);display:none}
+.top-button.show{display:block}
+.hero{scroll-margin-top:70px}
+.section,.local-note,.emergency{scroll-margin-top:72px}
+@media(max-width:620px){
+ .mobile-nav{top:5px}
+ .mobile-nav a,.mobile-nav button{font-size:.69rem}
+ .hero{border-radius:23px}
+ .hero h1{font-size:clamp(2.5rem,17vw,4rem)}
+ .em-grid a{border-radius:13px}
+ .actions button{min-height:58px}
+ .card{padding:14px;border-radius:15px}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.card:hover,.actions button:hover{transform:none}}
