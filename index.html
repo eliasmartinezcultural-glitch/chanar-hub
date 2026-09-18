@@ -30,10 +30,49 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const norm=s=>String(s??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
 const registry=()=>window.CHANAR_REGISTRY?.places||[];
 function haystack(x){return [x.name,x.category,x.subcategory,x.description,x.address,x.source,...(x.tags||[])].map(norm).join(' ')}
-const aliases={salud:['salud','hospital','clinica','medico','farmacia'],comer:['comer','comida','gastronomia','restaurante','restaurant'],comprar:['comprar','comercio','comercios','supermercado','autoservicio','tienda'],escuela:['escuela','educacion','educativa','colegio','jardin'],deporte:['deporte','club','futbol','gimnasio'],turismo:['turismo','bodega','rio','balneario','viñedo','visitar'],tramite:['tramite','municipio','institucion','oficina'],auto:['auto','automotor','repuesto','mecanico','mecanica','taller']};
-function score(x,q){const n=norm(x.name),t=haystack(x);if(!q)return 0;if(n===q)return 160;if(n.startsWith(q))return 110;if(n.includes(q))return 80;if(t.includes(q))return 40;let s=0;for(const w of q.split(/\s+/))if(w.length>2&&t.includes(w))s+=18;return s}
-function query(q){q=norm(q);let terms=[q];for(const [k,v] of Object.entries(aliases))if(q===k||v.some(a=>q.includes(a)))terms.push(...v);terms=[...new Set(terms)];return registry().map(x=>[Math.max(...terms.map(t=>score(x,t))),x]).filter(a=>a[0]>0).sort((a,b)=>b[0]-a[0]).slice(0,12).map(a=>a[1])}
-function status(x){if(x.status==='verified'&&Number.isFinite(x.lat)&&Number.isFinite(x.lon))return ['Dato verificado','verified'];if(x.status==='verified')return ['Verificado · falta ubicación','review'];return ['Dato en revisión','review']}
+const aliases={
+  salud:['salud','hospital','clinica','clínica','medico','médico','farmacia','enfermeria','enfermería'],
+  comer:['comer','comida','gastronomia','gastronomía','restaurante','restaurant','parrilla','bar'],
+  comprar:['comprar','comercio','comercios','supermercado','autoservicio','tienda','kiosco','mercado'],
+  escuela:['escuela','educacion','educación','educativa','colegio','jardin','jardín','primaria','secundaria'],
+  deporte:['deporte','club','futbol','fútbol','gimnasio','playon','playón','estadio'],
+  turismo:['turismo','bodega','rio','río','balneario','viñedo','visitar','mirador','camping'],
+  tramite:['tramite','trámite','municipio','institucion','institución','oficina','registro','dni'],
+  auto:['auto','automotor','repuesto','mecanico','mecánico','mecanica','mecánica','taller','gomeria','gomería'],
+  combustible:['combustible','nafta','gasolina','estacion','estación','ypf'],
+  dormir:['dormir','hotel','hospedaje','alojamiento','hosteria','hostería','cabaña'],
+  familia:['familia','niños','niños','infancias','plaza','juegos'],
+  trabajo:['trabajo','empleo','oficio','formacion','formación','curso','capacitación'],
+  urgente:['urgente','emergencia','bomberos','policia','policía','ambulancia','defensa civil']
+};
+const stop=new Set(['necesito','quiero','busco','donde','dónde','hay','para','con','una','uno','del','que','qué','por','favor','me','mi','en','el','la','los','las']);
+function tokens(q){return norm(q).split(/\s+/).filter(w=>w.length>2&&!stop.has(w))}
+function score(x,q){
+  const n=norm(x.name),t=haystack(x), words=tokens(q);
+  if(!q)return 0;
+  let s=0;
+  if(n===q)s+=220;
+  if(n.startsWith(q))s+=140;
+  if(n.includes(q))s+=95;
+  for(const w of words){
+    if(n===w)s+=110;
+    else if(n.includes(w))s+=55;
+    else if(t.includes(w))s+=24;
+  }
+  if(norm(x.category).includes(q)||norm(x.subcategory).includes(q))s+=35;
+  if(x.status==='verified')s+=8;
+  if(Number.isFinite(x.lat)&&Number.isFinite(x.lon))s+=4;
+  return s;
+}
+function query(q){
+  q=norm(q);
+  const expanded=new Set([q,...tokens(q)]);
+  for(const [k,v] of Object.entries(aliases)){
+    if(q===k||v.some(a=>tokens(q).includes(norm(a))||q.includes(norm(a)))) expanded.add(k),v.forEach(a=>expanded.add(norm(a)));
+  }
+  return registry().map(x=>[Math.max(...[...expanded].map(t=>score(x,t))),x])
+    .filter(a=>a[0]>0).sort((a,b)=>b[0]-a[0]).slice(0,12).map(a=>a[1]);
+}
 function stats(){const d=registry(),loc=d.filter(x=>Number.isFinite(x.lat)&&Number.isFinite(x.lon)).length,ver=d.filter(x=>x.status==='verified').length;document.getElementById('stats').innerHTML=`<div class="stat"><strong>${d.length}</strong><span>registros locales</span></div><div class="stat"><strong>${loc}</strong><span>con ubicación</span></div><div class="stat"><strong>${ver}</strong><span>verificados</span></div>`}
 function render(q){const out=document.getElementById('result');q=norm(q);if(!q){out.innerHTML='<div class="empty"><b>Probá una palabra o frase.</b><p>Ej.: “necesito comer”, “farmacia”, “escuela”, “bodega” o “arreglar el auto”.</p></div>';return}const rows=query(q);if(!rows.length){out.innerHTML='<div class="empty"><b>Todavía no tenemos ese dato.</b><p>Probá otra palabra. Si tampoco aparece, acabás de detectar una oportunidad para mejorar Chañar HUB.</p></div>';return}out.innerHTML='<div class="results">'+rows.map(x=>{const [label,kind]=status(x),located=Number.isFinite(x.lat)&&Number.isFinite(x.lon),map=located?'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(x.lat+','+x.lon):'',phone=x.phone?String(x.phone).replace(/\s/g,''):'';return `<article class="card place"><div class="grow"><div class="rank">${label}</div><h3>${esc(x.name)}</h3><p>${esc(x.category||'Lugar local')}${x.subcategory?' · '+esc(x.subcategory):''}</p>${x.address?`<p><b>📍</b> ${esc(x.address)}</p>`:''}${x.description?`<p>${esc(x.description)}</p>`:''}</div><div class="place-actions">${phone?`<a class="btn" href="tel:${esc(phone)}">📞 Llamar</a>`:''}${map?`<a class="btn main" target="_blank" rel="noopener" href="${map}">🗺️ Cómo llegar</a>`:''}</div></article>`}).join('')+'</div>'}
 function doQuery(q){document.getElementById('q').value=q;document.getElementById('buscar').scrollIntoView({behavior:'smooth',block:'start'});render(q)}
