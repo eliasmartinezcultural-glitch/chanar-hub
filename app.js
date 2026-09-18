@@ -90,3 +90,17 @@ document.addEventListener("click",e=>{
 
 const quick=["hospital","farmasalud","puma","delorean","hosteria","supermercado","municipalidad","balneario"].map(id=>DATA.find(x=>x.id===id)).filter(Boolean);
 document.getElementById("quick").innerHTML=quick.map(card).join("");
+
+
+// Chañar HUB · comportamiento multiplataforma
+const offlineBar=document.getElementById("offlineBar");
+function setConnection(){document.body.classList.toggle("is-offline",!navigator.onLine)}
+window.addEventListener("online",setConnection);window.addEventListener("offline",setConnection);setConnection();
+document.getElementById("shareHub")?.addEventListener("click",async()=>{
+ const data={title:"Chañar HUB",text:"Chañar HUB · guía útil de San Patricio del Chañar",url:location.href};
+ if(navigator.share){try{await navigator.share(data)}catch(e){}}
+ else{try{await navigator.clipboard.writeText(location.href);alert("Enlace de Chañar HUB copiado.")}catch(e){prompt("Copiá este enlace:",location.href)}}
+});
+const topButton=document.getElementById("topButton");
+window.addEventListener("scroll",()=>topButton?.classList.toggle("show",scrollY>420),{passive:true});
+topButton?.addEventListener("click",()=>scrollTo({top:0,behavior:"smooth"}));
