@@ -37,7 +37,7 @@ function card(x){
  const map=x.address?'<a class="secondary" target="_blank" rel="noopener" href="'+maps(x)+'">📍 Cómo llegar</a>':"";
  const share='<button class="share" type="button" data-share="'+esc(x.id)+'">↗ Compartir</button>';
  const level=x.level==="oficial"?"Fuente oficial":x.level==="institucional"?"Fuente institucional":"Ficha local consultada"; const sourceLabel=x.level==="local"?"↗ Ver ficha":"↗ Fuente";
- return '<article class="card"><h3>'+esc(x.name)+'</h3><span class="badge">'+level+'</span>'+(x.address?'<p>📍 '+esc(x.address)+'</p>':"")+(x.phone?'<p>☎️ '+esc(x.phone)+'</p>':"")+'<p>Fuente: '+esc(x.source)+'</p><div class="buttons">'+phone+map+'<a class="secondary" target="_blank" rel="noopener" href="'+esc(x.url)+'">"+sourceLabel+"</a>'+share+'</div></article>';
+ return '<article class="card"><h3>'+esc(x.name)+'</h3><span class="badge">'+level+'</span>'+(x.address?'<p>📍 '+esc(x.address)+'</p>':"")+(x.phone?'<p>☎️ '+esc(x.phone)+'</p>':"")+'<p>Fuente: '+esc(x.source)+'</p><div class="buttons">'+phone+map+'<a class="secondary" target="_blank" rel="noopener" href="'+esc(x.url)+'">' + sourceLabel + '</a>'+share+'</div></article>';
 }
 
 function render(items){
