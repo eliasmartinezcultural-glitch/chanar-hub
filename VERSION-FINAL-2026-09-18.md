@@ -1,12 +1,10 @@
-# Chañar HUB · VERSIÓN 1 REAL Y FUNCIONAL · CONSOLIDADA Y BLOQUEADA
+# Chañar HUB · VERSIÓN 1.3 · CONSOLIDADA Y BLOQUEADA
 
 **Fecha de corte:** 18 de septiembre de 2026
 
 Esta versión reemplaza las bases anteriores y queda establecida como **versión pública consolidada**.
 
-## Presentación oficial V1\n\nEsta es la primera versión pública presentada como producto real y funcional. El objetivo de esta edición es que una persona pueda entrar, encontrar una solución local y compartir una ficha o el HUB completo sin explicación adicional.\n\n## Estado
-
-- Directorio auditado campo por campo.
+## Presentación pública V1.3\n\nLa presentación pública se mantiene deliberadamente simple: **“Para cuando necesitás resolver algo en Chañar.”**\n\n## Estado\n\n- Directorio auditado campo por campo.
 - 26 fichas públicas.
 - Bloque de farmacias actualizado a septiembre de 2026.
 - Datos institucionales revisados con fuentes oficiales cuando están disponibles.
