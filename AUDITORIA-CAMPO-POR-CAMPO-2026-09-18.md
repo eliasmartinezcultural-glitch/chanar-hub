@@ -66,3 +66,8 @@ Cada nueva ficha deberá entrar primero en una **cola de verificación** y no di
 - **PUMA El Chañar:** dirección, fuente y enlace pasan a VERIFICADO; el teléfono continúa PENDIENTE porque la fuente oficial localizada es antigua y no se incorpora un número sin respaldo temporal suficiente. La ubicación también está corroborada por referencias actuales. citeturn1search1turn0search8
 - **Comisaría 13:** su existencia actual está respaldada por fuentes provinciales, pero no se adopta ningún teléfono antiguo como vigente. Se mantiene PENDIENTE en ese campo. citeturn1search7turn1search2
 - **Lenguaje visual:** se agregaron cuatro patrones mínimos —viña, río, ruta y barda— distribuidos por la página. No utilizan imágenes, fuentes externas ni librerías.
+
+
+## Actualización sanitaria · 18/09/2026
+
+Se revisó específicamente el bloque de farmacias para septiembre de 2026. La ficha anterior **Farmasalud** no se mantiene como referencia operativa principal del HUB. Se incorporan **Farmacias y Perfumerías Global** y **Farmacia San Patricio**, ambas con referencias actuales de 2026. Global queda con teléfono pendiente hasta contar con una fuente suficientemente sólida; San Patricio conserva el teléfono 0299-485-5138 respaldado por una cartilla de prestadores y referencias actuales de turnos. citeturn1search1turn1search34
