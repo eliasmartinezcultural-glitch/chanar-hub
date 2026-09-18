@@ -1,23 +1,36 @@
 const DATA=[
-{id:"hospital",type:"salud",name:"Hospital Dra. Alicia Cruz",address:"San Patricio del Chañar",phone:"0299 485-5084",source:"Ministerio de Salud del Neuquén",url:"https://salud.neuquen.gob.ar/hospitales-y-centros/",tags:"hospital salud emergencia"},
-{id:"hosteria",type:"dormir",name:"El Chañar · Hostería o Posada",address:"Araucaria 565, Barrio Jardín",phone:"299-5286731",source:"Turismo Neuquén",url:"https://turismo.neuquen.gob.ar/alojamientos/el-chanar-cuit-n-27-24388984-2/",tags:"dormir alojamiento hosteria"},
-{id:"balneario",type:"visitar",name:"Balneario Municipal · Camping",address:"Sector del Balneario Municipal, San Patricio del Chañar",phone:"",source:"Gobierno de Neuquén",url:"https://www.neuqueninforma.gob.ar/amp/noticias/2025/01/13/247652-habilitaron-camping-en-san-patricio-del-chanar",tags:"visitar camping río familia verano"},
-{id:"bodega-schroeder",type:"visitar",name:"Bodega Familia Schroeder",address:"Calle 7 Norte",phone:"+54 299 454-8920",source:"Familia Schroeder / Turismo Neuquén",url:"https://familiaschroeder.com/arg/turismo/",tags:"visitar bodega vino turismo"},
-{id:"emergencias",type:"salud",name:"Emergencias médicas · SIEN",address:"",phone:"107",source:"Gobierno de Neuquén",url:"https://seguridad.neuquen.gob.ar/",tags:"urgente emergencia ambulancia"},
-{id:"bomberos",type:"emergencia",name:"Bomberos",address:"",phone:"100",source:"Gobierno de Neuquén",url:"https://copronaf.neuquen.gob.ar/contacto/",tags:"urgente incendio fuego"},
-{id:"policia",type:"emergencia",name:"Policía",address:"",phone:"101",source:"Gobierno de Neuquén",url:"https://copronaf.neuquen.gob.ar/contacto/",tags:"urgente seguridad"},
-{id:"defensa",type:"emergencia",name:"Defensa Civil",address:"",phone:"103",source:"Gobierno de Neuquén",url:"https://seguridad.neuquen.gob.ar/",tags:"urgente defensa"},
-{id:"vial",type:"emergencia",name:"Siniestros viales",address:"",phone:"149",source:"Ministerio de Seguridad del Neuquén",url:"https://seguridad.neuquen.gob.ar/",tags:"urgente ruta accidente tránsito"},
-{id:"violencia",type:"emergencia",name:"Asistencia en violencia",address:"",phone:"148",source:"Ministerio de Seguridad del Neuquén",url:"https://seguridad.neuquen.gob.ar/",tags:"urgente violencia"}
+{id:"hospital",type:"salud",name:"Hospital Dra. Alicia Cruz",address:"San Patricio del Chañar",phone:"0299 485-5084",source:"Ministerio de Salud del Neuquén",url:"https://salud.neuquen.gob.ar/hospitales-y-centros/",tags:"hospital salud emergencia guardia médico",level:"oficial"},
+{id:"farmasalud",type:"salud",name:"Farmacia Farmasalud",address:"Villa Pehuenia esq. Calquén Oeste",phone:"0299 485-5108",source:"Cámara Neuquina de Farmacias",url:"https://cnf.org.ar/doc.php?doc=37",tags:"farmacia medicamentos remedios salud",level:"institucional"},
+{id:"hosteria",type:"dormir",name:"El Chañar · Hostería o Posada",address:"Araucaria 565, Barrio Jardín",phone:"299-5286731",source:"Turismo Neuquén",url:"https://turismo.neuquen.gob.ar/alojamientos/el-chanar-cuit-n-27-24388984-2/",tags:"dormir alojamiento hosteria hospedaje",level:"oficial"},
+{id:"balneario",type:"visitar",name:"Balneario Municipal · Camping",address:"Sector del Balneario Municipal, San Patricio del Chañar",phone:"",source:"Gobierno de Neuquén",url:"https://www.neuqueninforma.gob.ar/amp/noticias/2025/01/13/247652-habilitaron-camping-en-san-patricio-del-chanar",tags:"visitar camping río playa pileta picnic parrilla turismo",level:"oficial"},
+{id:"bodega-schroeder",type:"visitar",name:"Bodega Familia Schroeder",address:"Lote 109 Parte Chacra B7, San Patricio del Chañar",phone:"0299 454-8920",source:"Turismo Neuquén",url:"https://turismo.neuquen.gob.ar/alojamientos/bodega-schroeder/",tags:"visitar bodega vino turismo saurus restaurante",level:"oficial"},
+{id:"municipalidad",type:"tramites",name:"Municipalidad de San Patricio del Chañar",address:"Quili Malal 314",phone:"+54 299 408-4225",source:"Municipalidad de San Patricio del Chañar",url:"https://sanpatricio.gob.ar/sec-cordinacion",tags:"tramites municipio municipalidad gobierno consultas",level:"oficial"},
+{id:"correo",type:"tramites",name:"Correo Argentino · Sucursal San Patricio del Chañar",address:"Villa Pehuenia s/n",phone:"+54 299 485-5273",source:"Ficha local",url:"https://www.google.com/maps/search/?api=1&query=Correo+Argentino+San+Patricio+del+Chañar",tags:"correo encomienda paquete carta postal envío trámites",level:"local"},
+{id:"juzgado-paz",type:"tramites",name:"Juzgado de Paz",address:"El Arco 435",phone:"+54 299 485-5029",source:"Ficha local",url:"https://www.google.com/maps/search/?api=1&query=Juzgado+de+Paz+San+Patricio+del+Chañar",tags:"juzgado paz trámites justicia legal",level:"local"},
+{id:"comisaria",type:"tramites",name:"Comisaría 13",address:"Pilmaiquén s/n",phone:"+54 299 485-5079",source:"Ficha local",url:"https://www.google.com/maps/search/?api=1&query=Comisaría+13+San+Patricio+del+Chañar",tags:"policia comisaria seguridad denuncia",level:"local"},
+{id:"puma",type:"moverme",name:"Estación de Servicio Puma",address:"Chos Malal y Acceso Principal",phone:"",source:"Ficha local",url:"https://www.google.com/maps/search/?api=1&query=Estación+de+Servicio+Puma+San+Patricio+del+Chañar",tags:"nafta combustible diesel gasoil estación servicio cargar combustible",level:"local"},
+{id:"mecanico",type:"moverme",name:"Servicio Mecánico",address:"Complejo El Chocón, Manzana G9, Lote 8",phone:"+54 299 549-6446",source:"Ficha local",url:"https://www.google.com/maps/search/?api=1&query=Servicio+Mecánico+Complejo+El+Chocón+San+Patricio+del+Chañar",tags:"auto mecánico taller vehículo camioneta moto reparación",level:"local"},
+{id:"supermercado",type:"comprar",name:"La Anónima",address:"Chos Malal 266",phone:"0299 485-5002",source:"La Anónima",url:"https://tecno.laanonima.com.ar/empresa/sucursales/tolhuin",tags:"comprar supermercado alimentos comida compras",level:"oficial"},
+{id:"corralon",type:"comprar",name:"Corralón Pitty",address:"Río Neuquén Mza G2 Lote 11 y 12",phone:"+54 299 485-5419",source:"Ficha local",url:"https://www.google.com/maps/search/?api=1&query=Corralón+Pitty+San+Patricio+del+Chañar",tags:"comprar materiales ferreteria corralon construcción reparación",level:"local"},
+{id:"centro-cultural",type:"visitar",name:"Centro Cultural",address:"Ing. Roberto Gasparri Norte",phone:"+54 299 485-5367",source:"Ficha local",url:"https://www.google.com/maps/search/?api=1&query=Centro+Cultural+San+Patricio+del+Chañar",tags:"visitar cultura eventos actividades centro cultural",level:"local"},
+{id:"emergencias",type:"salud",name:"Emergencias médicas · SIEN",address:"",phone:"107",source:"Gobierno de Neuquén",url:"https://seguridad.neuquen.gob.ar/",tags:"urgente emergencia ambulancia salud",level:"oficial"},
+{id:"bomberos",type:"emergencia",name:"Bomberos",address:"",phone:"100",source:"Gobierno de Neuquén",url:"https://copronaf.neuquen.gob.ar/contacto/",tags:"urgente incendio fuego rescate",level:"oficial"},
+{id:"policia",type:"emergencia",name:"Policía",address:"",phone:"101",source:"Gobierno de Neuquén",url:"https://copronaf.neuquen.gob.ar/contacto/",tags:"urgente seguridad policía",level:"oficial"},
+{id:"defensa",type:"emergencia",name:"Defensa Civil",address:"",phone:"103",source:"Gobierno de Neuquén",url:"https://seguridad.neuquen.gob.ar/",tags:"urgente defensa inundacion incendio",level:"oficial"},
+{id:"vial",type:"emergencia",name:"Siniestros viales",address:"",phone:"149",source:"Ministerio de Seguridad del Neuquén",url:"https://seguridad.neuquen.gob.ar/",tags:"urgente ruta accidente tránsito vial",level:"oficial"},
+{id:"violencia",type:"emergencia",name:"Asistencia en violencia",address:"",phone:"148",source:"Ministerio de Seguridad del Neuquén",url:"https://seguridad.neuquen.gob.ar/",tags:"urgente violencia asistencia",level:"oficial"}
 ];
 
 const norm=s=>String(s??"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const maps=x=>x.address?'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(x.name+" "+x.address+" San Patricio del Chañar"):"";
 
 function card(x){
  const phone=x.phone?'<a href="tel:'+x.phone.replace(/\D/g,"")+'">☎️ Llamar</a>':"";
- const map=x.address?'<a class="secondary" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(x.name+" "+x.address+" San Patricio del Chañar")+'">📍 Cómo llegar</a>':"";
- return '<article class="card"><h3>'+esc(x.name)+'</h3>'+(x.address?'<p>📍 '+esc(x.address)+'</p>':"")+(x.phone?'<p>☎️ '+esc(x.phone)+'</p>':"")+'<p>Fuente: '+esc(x.source)+'</p><div class="buttons">'+phone+map+'<a class="secondary" target="_blank" rel="noopener" href="'+x.url+'">↗ Fuente</a></div></article>';
+ const map=x.address?'<a class="secondary" target="_blank" rel="noopener" href="'+maps(x)+'">📍 Cómo llegar</a>':"";
+ const share='<button class="share" type="button" data-share="'+esc(x.id)+'">↗ Compartir</button>';
+ const level=x.level==="oficial"?"Fuente oficial":x.level==="institucional"?"Fuente institucional":"Ficha local";
+ return '<article class="card"><h3>'+esc(x.name)+'</h3><span class="badge">'+level+'</span>'+(x.address?'<p>📍 '+esc(x.address)+'</p>':"")+(x.phone?'<p>☎️ '+esc(x.phone)+'</p>':"")+'<p>Fuente: '+esc(x.source)+'</p><div class="buttons">'+phone+map+'<a class="secondary" target="_blank" rel="noopener" href="'+esc(x.url)+'">↗ Fuente</a>'+share+'</div></article>';
 }
 
 function render(items){
@@ -29,11 +42,10 @@ function search(q){
  if(!q){document.getElementById("results").innerHTML="";return}
  const words=q.split(/\s+/).filter(x=>x.length>1);
  const items=DATA.map(x=>{
-   const hay=norm([x.name,x.address,x.type,x.tags].join(" "));
    let score=0;
    words.forEach(w=>{
-     if(norm(x.name).includes(w))score+=5;
-     if(norm(x.type).includes(w))score+=4;
+     if(norm(x.name).includes(w))score+=7;
+     if(norm(x.type).includes(w))score+=5;
      if(norm(x.address).includes(w))score+=3;
      if(norm(x.tags).includes(w))score+=2;
    });
@@ -42,9 +54,21 @@ function search(q){
  render(items);
 }
 
+async function shareItem(id){
+ const x=DATA.find(i=>i.id===id);
+ if(!x)return;
+ const text=[x.name,x.address&&"📍 "+x.address,x.phone&&"☎️ "+x.phone,"Fuente: "+x.source].filter(Boolean).join("\n");
+ if(navigator.share){
+   try{await navigator.share({title:x.name,text,url:location.href+"#"+x.id});return}catch(e){}
+ }
+ try{await navigator.clipboard.writeText(text);alert("Ficha copiada. Podés pegarla en WhatsApp.");}
+ catch(e){alert(text);}
+}
+
 document.getElementById("searchForm").addEventListener("submit",e=>{
  e.preventDefault();
  search(document.getElementById("q").value);
+ document.getElementById("results").scrollIntoView({behavior:"smooth",block:"start"});
 });
 
 document.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>{
@@ -53,5 +77,10 @@ document.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click"
  document.getElementById("results").scrollIntoView({behavior:"smooth",block:"start"});
 }));
 
-const quick=["hospital","balneario","bodega-schroeder","hosteria"].map(id=>DATA.find(x=>x.id===id)).filter(Boolean);
+document.addEventListener("click",e=>{
+ const b=e.target.closest("[data-share]");
+ if(b)shareItem(b.dataset.share);
+});
+
+const quick=["hospital","farmasalud","hosteria","supermercado","puma","municipalidad","balneario","bodega-schroeder"].map(id=>DATA.find(x=>x.id===id)).filter(Boolean);
 document.getElementById("quick").innerHTML=quick.map(card).join("");
