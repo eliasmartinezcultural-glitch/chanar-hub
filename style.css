@@ -32,6 +32,9 @@ a,button{touch-action:manipulation}
 .card h3{margin:0 0 5px;font-size:1.08rem;line-height:1.25}
 .card p{margin:3px 0;color:var(--muted);font-size:.88rem}
 .card .buttons{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.card .share{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 11px;border-radius:11px;background:var(--paper);color:var(--green);border:2px solid var(--green);font-weight:800;font-size:.84rem;cursor:pointer}
+.card .badge{display:inline-block;margin:2px 0 5px;padding:3px 7px;border-radius:999px;background:#e9dfc9;color:var(--green);font-size:.68rem;font-weight:850}
+.card .share:focus-visible{outline:3px solid #d19d27;outline-offset:2px}
 .card a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 11px;border-radius:11px;background:var(--green);color:white;text-decoration:none;font-weight:800;font-size:.84rem}
 .card a.secondary{background:white;color:var(--green);border:2px solid var(--green)}
 .empty{padding:14px;border:2px dashed var(--line);border-radius:14px;background:var(--paper);color:var(--muted)}
