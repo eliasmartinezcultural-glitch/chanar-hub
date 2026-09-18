@@ -107,3 +107,16 @@ body.is-offline .offline-bar{display:block}
  .card{padding:14px;border-radius:15px}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.card:hover,.actions button:hover{transform:none}}
+
+
+/* CONSOLIDACIÓN FINAL · ajustes ópticos mínimos */
+@media(max-width:620px){
+  .hero p{font-size:1rem}
+  .local-strip{gap:5px}
+  .local-strip span{font-size:.68rem}
+  .mobile-nav{margin-top:0}
+}
+@media(max-width:380px){
+  .mobile-nav{grid-template-columns:repeat(4,1fr);gap:3px;padding:5px}
+  .mobile-nav a,.mobile-nav button{font-size:.64rem;min-height:38px}
+}
