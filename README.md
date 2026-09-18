@@ -37,6 +37,19 @@ Las vistas principales son:
 - `auditoria.html` · control y confianza.
 - `compartir.html` · distribución por enlace, WhatsApp y redes.
 
+### Fuentes vivas y actualización automática
+
+Chañar HUB separa **información estructural** de **información dinámica**:
+
+- `chanar-registry.js` sigue siendo la fuente canónica de lugares y fichas.
+- `data/live-sources.json` concentra las fuentes externas vigentes.
+- `data/live-news.json` recibe novedades locales filtradas desde fuentes con RSS.
+- `chanar-live.js` muestra esa actualidad sin convertirla en datos canónicos.
+- `.github/workflows/live-sources.yml` refresca las novedades automáticamente cada 3 horas y también permite ejecución manual.
+- Las noticias no modifican automáticamente teléfonos, direcciones, coordenadas ni estados de los registros: una noticia nunca contamina la base estructural.
+
+Fuentes incorporadas: Municipalidad de San Patricio del Chañar, Neuquén Informa, EPEN, Ministerio de Salud del Neuquén, Turismo Neuquén y Chañar Digital.
+
 ### Mobile y distribución
 
 - Mobile-first y táctil.
@@ -45,7 +58,7 @@ Las vistas principales son:
 - Compartir nativo cuando el navegador lo permite.
 - WhatsApp y copia de enlace como caminos directos.
 - Metadatos sociales preparados en la página de distribución.
-- GitHub Pages mantiene el proyecto como sitio estático y sin instalación.
+- GitHub Pages mantiene el proyecto como sitio estático y sin instalación. La actualidad se precalcula mediante GitHub Actions para que el celular no tenga que consultar múltiples sitios externos.
 
 ### Protección de la base
 
