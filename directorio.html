@@ -1,9 +1,11 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#355b3d">
-<meta name="description" content="Directorio local de San Patricio del Chañar: lugares, instituciones, servicios y datos documentados.">\n<meta name="apple-mobile-web-app-capable" content="yes">\n<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="description" content="Directorio local de San Patricio del Chañar: lugares, instituciones, servicios y datos documentados.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>Directorio · Chañar HUB</title>
 <link rel="stylesheet" href="chanar-ui.css">
 <style>
@@ -41,7 +43,8 @@ renderFilters();updateStats();render();
 function shareFicha(id){
  const x=data.find(p=>p.id===id); if(!x)return;
  const u=new URL(location.href); u.search='?id='+encodeURIComponent(id); u.hash='ficha-'+encodeURIComponent(id);
- const msg=(x.name||'Lugar local')+' · Chañar HUB\n'+u.href;
+ const msg=(x.name||'Lugar local')+' · Chañar HUB
+'+u.href;
  if(navigator.share){navigator.share({title:x.name||'Chañar HUB',text:'Ficha local de '+(x.name||'este lugar')+'.',url:u.href}).catch(()=>{});}
  else if(navigator.clipboard){navigator.clipboard.writeText(msg).then(()=>alert('Enlace de la ficha copiado.')).catch(()=>prompt('Copiá este enlace:',u.href));}
  else prompt('Copiá este enlace:',u.href);
@@ -50,4 +53,5 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-share]');i
 const params=new URLSearchParams(location.search); const id=params.get('id');
 if(id){const target=data.find(p=>p.id===id);if(target){active='Todos';query='';renderFilters();render();setTimeout(()=>document.getElementById('ficha-'+CSS.escape(id))?.scrollIntoView({behavior:'smooth',block:'center'}),80);}}
 
-</script><script src="chanar-hub-core.js"></script>\n</body></html>
+</script><script src="chanar-hub-core.js"></script>
+</body></html>
