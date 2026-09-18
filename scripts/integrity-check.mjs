@@ -3,9 +3,9 @@ import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 
 const root = process.cwd();
-const required = ['index.html','viajero.html','vecinos.html','mapa.html','auditoria.html','compartir.html','chanar-ui.css','chanar-registry.js','geo-data.js','geo-territory.js','chanar-hub-core.js','data.js','404.html','.nojekyll','data/chanar-audit-2026-09-17.json','data/chanar-v1-lock.json','scripts/source-audit.mjs'];
-const pages = ['index.html','viajero.html','vecinos.html','mapa.html','auditoria.html','compartir.html'];
-const jsCore = ['chanar-registry.js','geo-data.js','geo-territory.js','data.js','chanar-hub-core.js','scripts/source-audit.mjs','scripts/integrity-check.mjs'];
+const required = ['index.html','viajero.html','vecinos.html','mapa.html','auditoria.html','compartir.html','chanar-ui.css','chanar-registry.js','geo-data.js','geo-territory.js','chanar-hub-core.js','data.js','404.html','.nojekyll','data/chanar-audit-2026-09-17.json','data/chanar-v1-lock.json','scripts/source-audit.mjs','chanar-live.js','data/live-sources.json','data/live-news.json'];
+const pages = ['index.html','viajero.html','vecinos.html','mapa.html','auditoria.html','compartir.html','directorio.html'];
+const jsCore = ['chanar-registry.js','geo-data.js','geo-territory.js','data.js','chanar-hub-core.js','chanar-live.js','scripts/source-audit.mjs','scripts/integrity-check.mjs'];
 let failures = [];
 for (const file of required) if (!existsSync(join(root,file))) failures.push(`Falta archivo núcleo: ${file}`);
 for (const file of pages) {
