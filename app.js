@@ -100,9 +100,9 @@ const offlineBar=document.getElementById("offlineBar");
 function setConnection(){document.body.classList.toggle("is-offline",!navigator.onLine)}
 window.addEventListener("online",setConnection);window.addEventListener("offline",setConnection);setConnection();
 document.getElementById("shareHub")?.addEventListener("click",async()=>{
- const data={title:"Chañar HUB · Guía útil",text:"Chañar HUB · San Patricio del Chañar",url:location.href};
+ const data={title:"Chañar HUB · Guía útil",text:"Chañar HUB · Para cuando necesitás resolver algo en Chañar.",url:location.href};
  if(navigator.share){try{await navigator.share(data);return}catch(e){}}
- const copyText="Chañar HUB · Guía útil de San Patricio del Chañar\\n\\n"+location.href;
+ const copyText="Chañar HUB · Para cuando necesitás resolver algo en Chañar.\\n\\n"+location.href;
  try{await navigator.clipboard.writeText(copyText);alert("Presentación de Chañar HUB copiada para compartir.");}catch(e){prompt("Copiá la presentación de Chañar HUB:",copyText)}
 });
 const topButton=document.getElementById("topButton");
