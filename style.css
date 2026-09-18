@@ -54,3 +54,28 @@ footer span{display:block;margin-top:4px}
   .actions{grid-template-columns:1fr}
   .em-grid a{min-height:76px}
 }
+
+/* Identidad visual local: chacras, río, bardas y ruta. Decoración liviana, sin imágenes externas. */
+.hero{isolation:isolate}
+.local-landscape{position:absolute;inset:auto 0 0 0;height:82px;pointer-events:none;z-index:-1;overflow:hidden}
+.hill{position:absolute;bottom:-62px;width:260px;height:120px;border:2px solid rgba(231,200,120,.22);border-radius:50%}
+.hill-a{left:-65px;transform:rotate(-8deg)}
+.hill-b{right:-70px;transform:rotate(8deg)}
+.vine{position:absolute;font-size:1.35rem;opacity:.5;filter:saturate(.8)}
+.vine-1{right:26px;bottom:27px}.vine-2{right:64px;bottom:7px}
+.road-mark{position:absolute;width:38px;height:3px;background:rgba(255,255,255,.35);transform:rotate(-13deg);bottom:12px}
+.road-1{left:18%}.road-2{left:35%}.road-3{left:52%}
+.local-divider{display:flex;align-items:center;gap:8px;margin:5px 7px 2px;color:var(--green2);opacity:.72;font-size:.78rem}
+.local-divider i{height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+.local-scene{height:54px;margin:3px 2px -7px;position:relative;overflow:hidden;border-radius:14px;opacity:.72}
+.local-scene:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 58%,rgba(23,59,45,.055) 58%,rgba(23,59,45,.055) 60%,transparent 60%)}
+.row{position:absolute;height:2px;background:var(--green2);opacity:.22;transform:rotate(-7deg);border-radius:50%}
+.row-1{width:44%;left:4%;bottom:11px}.row-2{width:42%;left:7%;bottom:21px}.row-3{width:39%;left:10%;bottom:31px}
+.water{position:absolute;right:2%;bottom:4px;width:42%;height:18px;border-top:2px solid var(--blue);border-radius:50%;transform:rotate(3deg);opacity:.28}
+.water:after{content:"";position:absolute;left:18%;top:7px;width:70%;height:8px;border-top:2px solid var(--blue);border-radius:50%}
+.barda{position:absolute;bottom:5px;width:90px;height:34px;border-top:2px solid #9b7b52;border-radius:50%;opacity:.25}
+.barda-1{right:31%}.barda-2{right:20%;bottom:9px;width:65px}
+.tiny-tree{position:absolute;font-size:1.1rem;opacity:.42;bottom:9px}.tree-1{left:3%}.tree-2{left:24%}
+.local-note{overflow:hidden}.local-note .note-marks{font-size:.74rem;letter-spacing:.12em;color:var(--green2);opacity:.62;margin-bottom:7px}
+footer:before{content:"🌱  ·  💧  ·  🍇  ·  🛣️";display:block;margin-bottom:8px;font-size:.72rem;letter-spacing:.12em;opacity:.7}
+@media(max-width:620px){.local-scene{height:46px}.local-landscape{height:72px}.vine{font-size:1.15rem}.local-divider{margin-left:3px;margin-right:3px}}
