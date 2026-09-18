@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#102f24"/><stop offset="1" stop-color="#285640"/></linearGradient>
+ <pattern id="p" width="36" height="36" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="1" fill="#d6a62c" opacity=".18"/></pattern>
+</defs>
+<rect width="1200" height="630" rx="36" fill="#eee2c8"/>
+<rect x="28" y="28" width="1144" height="574" rx="30" fill="url(#bg)"/>
+<rect x="28" y="28" width="1144" height="574" rx="30" fill="url(#p)"/>
+<text x="90" y="112" fill="#e7c878" font-family="Arial,sans-serif" font-size="25" font-weight="700" letter-spacing="3">SAN PATRICIO DEL CHAÑAR · NEUQUÉN</text>
+<text x="90" y="205" fill="#fffaf0" font-family="Georgia,serif" font-size="92" font-weight="700">Chañar HUB</text>
+<text x="94" y="260" fill="#f1d58a" font-family="Arial,sans-serif" font-size="31">Guía útil para resolver rápido en Chañar</text>
+<line x1="94" y1="305" x2="760" y2="305" stroke="#d6a62c" stroke-width="4" opacity=".8"/>
+<text x="94" y="365" fill="#fffaf0" font-family="Arial,sans-serif" font-size="27">🌱 Pueblo   ·   💧 Río   ·   🍇 Chacras   ·   🛣️ Ruta</text>
+<text x="94" y="520" fill="#f1d58a" font-family="Georgia,serif" font-size="25">Ocarina Producciones · con amor</text>
+<path d="M820 485 C900 420 940 390 1015 420 C1065 440 1095 390 1130 350" fill="none" stroke="#d6a62c" stroke-width="5" opacity=".55"/>
+<circle cx="950" cy="420" r="9" fill="#d6a62c"/><circle cx="1020" cy="420" r="9" fill="#d6a62c"/><circle cx="1090" cy="390" r="9" fill="#d6a62c"/>
+</svg>
