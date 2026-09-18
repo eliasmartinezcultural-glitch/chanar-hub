@@ -16,42 +16,43 @@
   <p>Información útil para resolver rápido.</p>
 </header>
 
-<section class="emergency">
+<section class="emergency" aria-labelledby="emergency-title">
   <div>
     <span class="eyebrow">SI ES URGENTE</span>
-    <h2>Pedí ayuda ahora</h2>
-    <p>Los números se muestran arriba de todo porque en una emergencia no hay tiempo para buscar.</p>
+    <h2 id="emergency-title">Pedí ayuda ahora</h2>
+    <p>Los números están primero para que no tengas que buscarlos.</p>
   </div>
   <div class="em-grid">
-    <a href="tel:107">🚑 <b>107</b><small>Emergencias médicas</small></a>
-    <a href="tel:100">🔥 <b>100</b><small>Bomberos</small></a>
-    <a href="tel:101">👮 <b>101</b><small>Policía</small></a>
-    <a href="tel:103">🛡️ <b>103</b><small>Defensa Civil</small></a>
-    <a href="tel:149">🚗 <b>149</b><small>Siniestros viales</small></a>
-    <a href="tel:148">🆘 <b>148</b><small>Violencia</small></a>
+    <a href="tel:107" aria-label="Llamar al 107, emergencias médicas">🚑 <b>107</b><small>Emergencias médicas</small></a>
+    <a href="tel:100" aria-label="Llamar al 100, bomberos">🔥 <b>100</b><small>Bomberos</small></a>
+    <a href="tel:101" aria-label="Llamar al 101, policía">👮 <b>101</b><small>Policía</small></a>
+    <a href="tel:103" aria-label="Llamar al 103, Defensa Civil">🛡️ <b>103</b><small>Defensa Civil</small></a>
+    <a href="tel:149" aria-label="Llamar al 149, siniestros viales">🚗 <b>149</b><small>Siniestros viales</small></a>
+    <a href="tel:148" aria-label="Llamar al 148, asistencia en violencia">🆘 <b>148</b><small>Violencia</small></a>
   </div>
 </section>
 
-<section class="section">
-<h2>¿Qué necesitás?</h2>
+<section class="section" aria-labelledby="need-title">
+<h2 id="need-title">¿Qué necesitás?</h2>
 <div class="actions">
-  <button data-filter="salud">🏥 Salud</button>
-  <button data-filter="auto">🔧 Auto</button>
-  <button data-filter="combustible">⛽ Combustible</button>
-  <button data-filter="dormir">🛏️ Dormir</button>
-  <button data-filter="comer">🍽️ Comer</button>
-  <button data-filter="visitar">🗺️ Visitar</button>
+  <button type="button" data-filter="salud">🏥 Salud</button>
+  <button type="button" data-filter="dormir">🛏️ Dormir</button>
+  <button type="button" data-filter="visitar">🗺️ Visitar</button>
 </div>
+<p class="hint">Solo aparecen opciones que ya tienen información cargada.</p>
 </section>
 
-<section class="section">
-<h2>🔎 Buscá directamente</h2>
-<div class="search"><input id="q" placeholder="Ej.: hospital, bodega, camping..." autocomplete="off"><button id="go">Buscar</button></div>
-<div id="results"></div>
+<section class="section" aria-labelledby="search-title">
+<h2 id="search-title">🔎 Buscá directamente</h2>
+<form class="search" id="searchForm">
+  <input id="q" name="q" type="search" placeholder="Ej.: hospital, bodega, camping..." autocomplete="off" enterkeyhint="search" aria-label="Buscar información">
+  <button type="submit" id="go">Buscar</button>
+</form>
+<div id="results" aria-live="polite"></div>
 </section>
 
-<section class="section">
-<h2>📍 Referencias útiles</h2>
+<section class="section" aria-labelledby="quick-title">
+<h2 id="quick-title">📍 Referencias útiles</h2>
 <div class="cards" id="quick"></div>
 </section>
 
