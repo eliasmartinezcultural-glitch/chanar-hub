@@ -20,9 +20,9 @@ No se agregan teléfonos, horarios, precios ni disponibilidad por inferencia. Un
 | bodega-schroeder | VERIFICADO | VERIFICADO | PENDIENTE | VERIFICADO | VERIFICADO |
 | municipalidad | VERIFICADO | VERIFICADO | VERIFICADO | VERIFICADO | VERIFICADO |
 | correo | VERIFICADO | VERIFICADO | VERIFICADO | PARCIAL | PARCIAL |
-| juzgado-paz | VERIFICADO | VERIFICADO | VERIFICADO | PARCIAL | PARCIAL |
+| juzgado-paz | VERIFICADO | VERIFICADO | VERIFICADO | VERIFICADO | VERIFICADO |
 | comisaria | VERIFICADO | VERIFICADO | PENDIENTE | PARCIAL | PARCIAL |
-| puma | VERIFICADO | VERIFICADO | PENDIENTE | PARCIAL | PARCIAL |
+| puma | VERIFICADO | VERIFICADO | PENDIENTE | VERIFICADO | VERIFICADO |
 | supermercado | VERIFICADO | VERIFICADO | VERIFICADO | VERIFICADO | VERIFICADO |
 | corralon | VERIFICADO | PARCIAL | PARCIAL | PARCIAL | PARCIAL |
 | delorean | VERIFICADO | VERIFICADO | VERIFICADO | VERIFICADO | VERIFICADO |
@@ -58,3 +58,11 @@ Cada nueva ficha deberá entrar primero en una **cola de verificación** y no di
 - **La Anónima:** teléfono y enlace pasan a VERIFICADO mediante el listado oficial de sucursales. citeturn0search0
 - **Corralón Pitty:** se baja a PARCIAL en dirección y teléfono hasta resolver la existencia de dos referencias distintas.
 - **Estética:** se incorporó una firma visible de **Ocarina Producciones · con amor** en la cabecera. La identidad visual se profundiza sin imágenes externas ni librerías, manteniendo carga rápida y uso multiplataforma.
+
+
+## Actualización crítica · 18/09/2026
+
+- **Juzgado de Paz:** pasa a VERIFICADO en nombre, domicilio, teléfono, fuente y enlace mediante el directorio oficial del Poder Judicial de Neuquén. citeturn1search0
+- **PUMA El Chañar:** dirección, fuente y enlace pasan a VERIFICADO; el teléfono continúa PENDIENTE porque la fuente oficial localizada es antigua y no se incorpora un número sin respaldo temporal suficiente. La ubicación también está corroborada por referencias actuales. citeturn1search1turn0search8
+- **Comisaría 13:** su existencia actual está respaldada por fuentes provinciales, pero no se adopta ningún teléfono antiguo como vigente. Se mantiene PENDIENTE en ese campo. citeturn1search7turn1search2
+- **Lenguaje visual:** se agregaron cuatro patrones mínimos —viña, río, ruta y barda— distribuidos por la página. No utilizan imágenes, fuentes externas ni librerías.
