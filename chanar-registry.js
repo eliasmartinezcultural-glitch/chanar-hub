@@ -57,18 +57,8 @@
     {key:'turismo',label:'Turismo',priority:9},
     {key:'urgente',label:'Emergencias',priority:10}
   ]);
-  const categoryAudit=Object.freeze(auditCategories.map(c=>{const rs=places.filter(x=>x.auditCategory===c.key);return Object.freeze({...c,count:rs.length,withPhone:rs.filter(x=>!!x.phone).length,withHours:rs.filter(x=>!!x.serviceHours).length,withAddress:rs.filter(x=>!!x.address).length,withSource:rs.filter(x=>!!x.sourceUrl).length,withMaps:rs.filter(x=>!!x.mapsUrl).length,verified:rs.filter(x=>x.status==='verified').length})}));    {key:'salud',label:'Salud',priority:1},
-    {key:'tramite',label:'Trámites',priority:2},
-    {key:'combustible',label:'Combustible',priority:3},
-    {key:'comer',label:'Comida',priority:4},
-    {key:'dormir',label:'Alojamiento',priority:5},
-    {key:'auto',label:'Auto',priority:6},
-    {key:'comprar',label:'Compras',priority:7},
-    {key:'familia',label:'Familias',priority:8},
-    {key:'turismo',label:'Turismo',priority:9},
-    {key:'urgente',label:'Emergencias',priority:10}
-  ]);
   const places=mergedPlaces.map(x=>normalize(x,'place')),territories=(territory.territories||[]).map(x=>normalize(x,'territory')),all=[...places,...territories],ids=new Set(),duplicateIds=[];
   for(const item of all){if(ids.has(item.identityKey))duplicateIds.push(item.identityKey);ids.add(item.identityKey)}
+  const categoryAudit=Object.freeze(auditCategories.map(cat=>{const rs=places.filter(x=>x.auditCategory===cat.key);return Object.freeze({...cat,count:rs.length,withPhone:rs.filter(x=>!!x.phone).length,withHours:rs.filter(x=>!!x.serviceHours).length,withAddress:rs.filter(x=>!!x.address).length,withSource:rs.filter(x=>!!x.sourceUrl).length,withMaps:rs.filter(x=>!!x.mapsUrl).length,verified:rs.filter(x=>x.status==='verified').length})}));
   window.CHANAR_REGISTRY=Object.freeze({schemaVersion:'1.2',updated:audited.checkedAt,name:'Inventario Canónico de Chañar',owner:'Chañar HUB · Ocarina Producciones',lifecycle:['descubierto','documentado','verificado','publicado'],undefinedObject.freeze([...new Set([...(source.categories||[]),...places.map(x=>x.category).filter(Boolean)])]),places:Object.freeze(places),territories:Object.freeze(territories),all:Object.freeze(all),audit:Object.freeze({total:all.length,places:places.length,territories:territories.length,locatedPlaces:places.filter(x=>x.spatialStatus==='located').length,addressVerifiedPlaces:places.filter(x=>x.spatialStatus==='address_verified').length,pendingPlaces:places.filter(x=>x.publication==='pending').length,auditedPlaces:places.filter(x=>x.audit.auditedLayer).length,retiredRecords:retired.size,projectRecords:places.filter(x=>x.status==='project').length,duplicateIdentityKeys:Object.freeze(duplicateIds)})});
 })();
