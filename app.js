@@ -100,9 +100,10 @@ const offlineBar=document.getElementById("offlineBar");
 function setConnection(){document.body.classList.toggle("is-offline",!navigator.onLine)}
 window.addEventListener("online",setConnection);window.addEventListener("offline",setConnection);setConnection();
 document.getElementById("shareHub")?.addEventListener("click",async()=>{
- const data={title:"Chañar HUB",text:"Chañar HUB · guía útil de San Patricio del Chañar",url:location.href};
- if(navigator.share){try{await navigator.share(data)}catch(e){}}
- else{try{await navigator.clipboard.writeText(location.href);alert("Enlace de Chañar HUB copiado.")}catch(e){prompt("Copiá este enlace:",location.href)}}
+ const data={title:"Chañar HUB · Guía útil",text:"Chañar HUB · San Patricio del Chañar\\nGuía útil local · Versión 1 · auditada 18/09/2026\\n26 fichas públicas · salud · trámites · comer · dormir · compras y más.",url:location.href};
+ if(navigator.share){try{await navigator.share(data);return}catch(e){}}
+ const copyText="Chañar HUB · Guía útil de San Patricio del Chañar\\nVersión 1 · presentación oficial · 18/09/2026\\n\\n26 fichas públicas, auditadas campo por campo.\\nSalud · trámites · comer · dormir · compras · moverse y más.\\n\\n"+location.href;
+ try{await navigator.clipboard.writeText(copyText);alert("Presentación de Chañar HUB copiada para compartir.");}catch(e){prompt("Copiá la presentación de Chañar HUB:",copyText)}
 });
 const topButton=document.getElementById("topButton");
 window.addEventListener("scroll",()=>topButton?.classList.toggle("show",scrollY>420),{passive:true});
