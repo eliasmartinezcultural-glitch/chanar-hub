@@ -1,28 +1,67 @@
-# Chañar HUB · Versión consolidada
+# Chañar HUB · Versión consolidada y bloqueada
 
-**Fecha:** 18 de septiembre de 2026
+**Fecha de corte:** 18 de septiembre de 2026
 
-Esta versión queda congelada como base pública estable.
+Esta versión reemplaza las bases anteriores y queda establecida como **versión pública consolidada**.
 
 ## Estado
 
-- Interfaz móvil y escritorio consolidada.
+- Directorio auditado campo por campo.
+- 26 fichas públicas.
+- Bloque de farmacias actualizado a septiembre de 2026.
+- Datos institucionales revisados con fuentes oficiales cuando están disponibles.
+- Campos dudosos marcados como PARCIAL o PENDIENTE.
 - Búsqueda y categorías operativas.
 - Fichas compartibles.
 - Vista previa social preparada.
 - PWA e instalación móvil preparadas.
-- Funcionamiento offline con actualización de caché.
+- Funcionamiento offline.
 - Identidad visual local consolidada.
-- Sin nuevas funciones pendientes dentro de esta versión.
+- Interfaz móvil y escritorio consolidada.
+- Fecha de auditoría visible en el pie.
 
-## Regla de mantenimiento
+## Bloqueo de esta versión
 
-No agregar funcionalidades ni ampliar el directorio sobre esta versión sin abrir una nueva fase/versionado.
+No se agregan nuevas funcionalidades ni nuevas fichas a esta versión.
 
-Las futuras modificaciones de datos deberán pasar primero por auditoría y las modificaciones visuales deberán conservar la simplicidad, velocidad y legibilidad móvil.
+Tampoco se corrigen datos directamente sobre la versión bloqueada sin pasar primero por una nueva auditoría.
 
-## Criterio
+### Para abrir una nueva fase
 
-**Primero confiabilidad. Después expansión.**
+Una modificación futura deberá:
+
+1. abrir una nueva versión;
+2. identificar exactamente qué ficha/campo cambia;
+3. documentar la fuente;
+4. contrastar el dato cuando sea posible;
+5. actualizar la auditoría;
+6. probar móvil y escritorio;
+7. recién después publicar.
+
+## Regla de datos
+
+**Nunca completar un dato faltante por intuición.**
+
+Especialmente:
+- teléfonos;
+- horarios;
+- precios;
+- disponibilidad;
+- turnos;
+- direcciones ambiguas.
+
+## Regla de diseño
+
+La interfaz debe conservar:
+- rapidez;
+- lectura inmediata;
+- uso con una mano;
+- bajo consumo de datos;
+- identidad local;
+- ausencia de dependencias innecesarias.
+
+## Principio
+
+**PRIMERO CONFIABILIDAD. DESPUÉS EXPANSIÓN.**
 
 Chañar HUB · guía útil de San Patricio del Chañar.
