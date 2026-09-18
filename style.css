@@ -120,3 +120,9 @@ body.is-offline .offline-bar{display:block}
   .mobile-nav{grid-template-columns:repeat(4,1fr);gap:3px;padding:5px}
   .mobile-nav a,.mobile-nav button{font-size:.64rem;min-height:38px}
 }
+
+
+/* V1 · presentación oficial */
+.version-mark{display:inline-block;margin:12px auto 0;padding:7px 11px;border:1px solid rgba(199,164,90,.55);border-radius:999px;background:rgba(199,164,90,.09);color:#e8d7aa;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.hub-proof{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:16px auto 4px;max-width:760px}.hub-proof span{padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);font-size:.72rem;font-weight:700;color:#f5eddc}
+@media(max-width:620px){.version-mark{font-size:.6rem;line-height:1.25}.hub-proof{gap:6px}.hub-proof span{font-size:.66rem;padding:6px 8px}}
