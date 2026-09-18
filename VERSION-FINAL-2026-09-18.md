@@ -1,10 +1,10 @@
-# Chañar HUB · Versión consolidada y bloqueada
+# Chañar HUB · VERSIÓN 1 REAL Y FUNCIONAL · CONSOLIDADA Y BLOQUEADA
 
 **Fecha de corte:** 18 de septiembre de 2026
 
 Esta versión reemplaza las bases anteriores y queda establecida como **versión pública consolidada**.
 
-## Estado
+## Presentación oficial V1\n\nEsta es la primera versión pública presentada como producto real y funcional. El objetivo de esta edición es que una persona pueda entrar, encontrar una solución local y compartir una ficha o el HUB completo sin explicación adicional.\n\n## Estado
 
 - Directorio auditado campo por campo.
 - 26 fichas públicas.
@@ -13,7 +13,7 @@ Esta versión reemplaza las bases anteriores y queda establecida como **versión
 - Campos dudosos marcados como PARCIAL o PENDIENTE.
 - Búsqueda y categorías operativas.
 - Fichas compartibles.
-- Vista previa social preparada.
+- Vista previa social preparada.\n- Enlace de compartir profesional con presentación institucional de la V1.\n- Identificación visual explícita de versión y fecha de corte.
 - PWA e instalación móvil preparadas.
 - Funcionamiento offline.
 - Identidad visual local consolidada.
