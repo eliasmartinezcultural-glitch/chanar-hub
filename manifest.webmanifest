@@ -1,11 +1,19 @@
 {
-  "name":"Chañar HUB · Guía útil",
-  "short_name":"Chañar HUB",
-  "description":"Información útil para resolver rápido en San Patricio del Chañar.",
-  "lang":"es-AR",
-  "start_url":"./",
-  "scope":"./",
-  "display":"standalone",
-  "background_color":"#eee2c8",
-  "theme_color":"#173b2d"
+  "name": "Chañar HUB · Guía útil",
+  "short_name": "Chañar HUB",
+  "description": "Información útil para resolver rápido en San Patricio del Chañar.",
+  "lang": "es-AR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#eee2c8",
+  "theme_color": "#173b2d",
+  "icons": [
+    {
+      "src": "app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
 }
