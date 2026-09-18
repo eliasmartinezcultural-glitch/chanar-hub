@@ -70,4 +70,4 @@ Cada nueva ficha deberá entrar primero en una **cola de verificación** y no di
 
 ## Actualización sanitaria · 18/09/2026
 
-Se revisó específicamente el bloque de farmacias para septiembre de 2026. La ficha anterior **Farmasalud** no se mantiene como referencia operativa principal del HUB. Se incorporan **Farmacias y Perfumerías Global** y **Farmacia San Patricio**, ambas con referencias actuales de 2026. Global queda con teléfono pendiente hasta contar con una fuente suficientemente sólida; San Patricio conserva el teléfono 0299-485-5138 respaldado por una cartilla de prestadores y referencias actuales de turnos. citeturn1search1turn1search34
+Se revisó específicamente el bloque de farmacias para septiembre de 2026. La ficha anterior **Farmasalud** no se mantiene como referencia operativa principal del HUB. Se incorporan **Farmacias y Perfumerías Global** y **Farmacia San Patricio**, ambas con referencias actuales de 2026. Global queda con teléfono pendiente hasta contar con una fuente suficientemente sólida; San Patricio conserva el teléfono 0299-485-5138 respaldado por una cartilla de prestadores y referencias actuales de turnos.
