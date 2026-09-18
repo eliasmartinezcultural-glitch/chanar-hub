@@ -43,7 +43,7 @@ const aliases={
   dormir:['dormir','hotel','hospedaje','alojamiento','hosteria','hostería','cabaña'],
   familia:['familia','niños','niños','infancias','plaza','juegos'],
   trabajo:['trabajo','empleo','oficio','formacion','formación','curso','capacitación'],
-  urgente:['urgente','emergencia','bomberos','policia','policía','ambulancia','defensa civil']
+  urgente:['urgente','emergencia','bomberos','policia','policía','ambulancia','defensa civil','seguridad']
 };
 const stop=new Set(['necesito','quiero','busco','donde','dónde','hay','para','con','una','uno','del','que','qué','por','favor','me','mi','en','el','la','los','las']);
 function tokens(q){return norm(q).split(/\s+/).filter(w=>w.length>2&&!stop.has(w))}
